@@ -12,7 +12,7 @@
                 <div class="field">
                     <textarea
                         class="textarea is-link"
-                        v-model="message"
+                        v-model="newMessage"
                         rows="2"
                         placeholder="Hello world"
                     ></textarea>
@@ -31,7 +31,7 @@
 export default {
     data() {
         return {
-            message: "",
+            newMessage: "",
             messages: [
                 {
                     id: "a1ee6624-01b7-4c5d-8628-450e43a4378e",
@@ -112,6 +112,15 @@ export default {
                 this.message = ""
             })*/
         },
+    },
+    created() {
+        // this.$eventsApi.get('events/' + this.$route.params.id + "/messages")
+        // .then(response => {
+        // this.messages = response.data
+        // })
+        // .catch((err) => {
+        //console.log(err)
+        // });
     },
 };
 </script>

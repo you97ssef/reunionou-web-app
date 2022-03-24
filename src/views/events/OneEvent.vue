@@ -25,10 +25,16 @@
                     <h3 class="m-3 title is-5 has-text-centered">
                         Participants
                     </h3>
-                    <div class="field has-text-centered">
-                        <router-link :to="'/share-events/' + event.id" type="submit" class="button is-link is-small">
+                    <div v-if="!shareCard" class="field has-text-centered">
+                        <button
+                            @click="toggleShareCard()"
+                            class="button is-link is-small"
+                        >
                             Ajouter participant
-                        </router-link>
+                        </button>
+                    </div>
+                    <div v-else>
+                        <ShareEvent :event="event" @toggleShareCard="toggleShareCard()" />
                     </div>
                     <Participant />
                 </div>
@@ -43,14 +49,17 @@
 
 <script>
 import Participant from "../../components/EventParticipants.vue";
+import ShareEvent from "../../components/ShareEvent.vue";
 import Messages from "../../components/EventMessages.vue";
 export default {
     components: {
         Participant,
-        Messages
+        Messages,
+        ShareEvent,
     },
     data() {
         return {
+            shareCard: false,
             event: {
                 id: "9a3f6f19-3f79-4079-ae09-807e813857fa",
                 title: "Cook the Thief His Wife & Her Lover, The",
@@ -68,7 +77,21 @@ export default {
             },
         };
     },
-    methods: {},
+    methods: {
+        toggleShareCard() {
+            this.shareCard = !this.shareCard;
+        },
+    },
+    created() {
+        // this.$eventsApi.get('events/' + this.$route.params.id)
+        // .then(response => {
+        // this.event = response.data
+        // })
+        // .catch((err) => {
+        //console.log(err)
+        // this.$router.push("/404");
+        // });
+    },
 };
 </script>
 

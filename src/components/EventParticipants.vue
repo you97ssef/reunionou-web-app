@@ -85,6 +85,15 @@ export default {
             ],
         };
     },
+    created() {
+        // this.$eventsApi.get('events/' + this.$route.params.id + "/members")
+        // .then(response => {
+        // this.members = response.data
+        // })
+        // .catch((err) => {
+        //console.log(err)
+        // });
+    },
 };
 </script>
 
