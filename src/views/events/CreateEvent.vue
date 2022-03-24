@@ -107,7 +107,7 @@ export default {
             // TODO: POST Create event
             // this.$eventsApi
             //     .post(
-            //         "URI", //TODO URI
+            //         "events", //TODO URI
             //         {}, //TODO BODY
             //         {} //TODO HEADERS
             //     )

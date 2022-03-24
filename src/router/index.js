@@ -10,7 +10,6 @@ import EditProfile from "../views/users/EditProfile";
 import Events from "../views/events/Events";
 import CreateEvent from "../views/events/CreateEvent";
 import OneEvent from "../views/events/OneEvent";
-import ShareEvent from "../views/events/ShareEvent";
 
 import store from '@/store/index.js';
 
@@ -58,12 +57,6 @@ const routes = [
         name: "one-event",
         component: OneEvent,
         beforeEnter: authGuardOrGuest
-    },
-    {
-        path: "/share-events/:id",
-        name: "share-event",
-        component: ShareEvent,
-        beforeEnter: authGuard
     },
     {
         path: "/login",
