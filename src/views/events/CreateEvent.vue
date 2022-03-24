@@ -19,7 +19,7 @@
                     v-model="event.description"
                     id="description"
                     rows="3"
-                    class="input"
+                    class="textarea"
                     type="text"
                     required
                     placeholder="Description"
@@ -78,7 +78,9 @@
                     placeholder="Adresse"
                 />
             </div>
-            <div class="field">
+
+            <Map :event="event" />
+            <div class="mt-5 field">
                 <button class="button is-success">Créer Evenement</button>
             </div>
         </form>
@@ -86,19 +88,29 @@
 </template>
 
 <script>
+import Map from "../../components/NewEventMap.vue";
+
 export default {
+    components: {
+        Map,
+    },
     data() {
         return {
             event: {
-                title: "",
-                description: "",
-                date: "",
-                time: "",
+                id: "e04cc94c-77a7-4671-8e52-34eb1d781d57",
+                title: "Dr. Dolittle",
+                description:
+                    "Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sitet, sem. Fusce consequat. Nulla nisl. Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus.",
+                user_id: "/users/73beeb05-f733-4a1b-b425-dc82c2bce9ae",
                 location: {
-                    name: "Zoombox",
-                    latitude: 117.9483319,
-                    longitude: -8.3501717,
+                    name: "Photofeed",
+                    latitude: 48.677474,
+                    longitude: 6.178464,
                 },
+                date: "12/11/2021",
+                heure: "7:58",
+                created_at: "2021-06-27 22:55:30",
+                updated_at: "2022-02-04 18:08:10",
             },
         };
     },

@@ -1,7 +1,9 @@
 <template>
     <div>
         <div class="columns is-multiline is-mobile">
-            <div class="column is-half-tablet is-full-mobile">MAP</div>
+            <div class="column is-half-tablet is-full-mobile">
+                <Map :event="event" />
+            </div>
             <div class="column is-half-tablet is-full-mobile">
                 <h1 class="title has-text-centered">{{ event.title }}</h1>
                 <h3 class="m-3 title is-5 has-text-centered">
@@ -17,8 +19,8 @@
                 </p>
 
                 <h3 class="m-3 title is-5">
-                    Emplacement : {{ event.spot.name }} -
-                    {{ event.spot.address }}
+                    Emplacement : {{ event.location.name }} -
+                    {{ event.location.address }}
                 </h3>
 
                 <div class="column">
@@ -34,7 +36,10 @@
                         </button>
                     </div>
                     <div v-else>
-                        <ShareEvent :event="event" @toggleShareCard="toggleShareCard()" />
+                        <ShareEvent
+                            :event="event"
+                            @toggleShareCard="toggleShareCard()"
+                        />
                     </div>
                     <Participant />
                 </div>
@@ -51,29 +56,33 @@
 import Participant from "../../components/EventParticipants.vue";
 import ShareEvent from "../../components/ShareEvent.vue";
 import Messages from "../../components/EventMessages.vue";
+import Map from "../../components/EventMap.vue";
+
 export default {
     components: {
         Participant,
         Messages,
         ShareEvent,
+        Map,
     },
     data() {
         return {
             shareCard: false,
             event: {
-                id: "9a3f6f19-3f79-4079-ae09-807e813857fa",
-                title: "Cook the Thief His Wife & Her Lover, The",
+                id: "e04cc94c-77a7-4671-8e52-34eb1d781d57",
+                title: "Dr. Dolittle",
                 description:
-                    "Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis.",
-                author: "18c4564a-2ab9-450e-ae17-aeddb70f10e6",
-                spot: {
-                    address: "5 Rue Blabla",
-                    name: "Oyoloo",
-                    coord: { latitude: 121.1293312, longitude: 14.5643857 },
+                    "Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sitet, sem. Fusce consequat. Nulla nisl. Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus.",
+                user_id: "/users/73beeb05-f733-4a1b-b425-dc82c2bce9ae",
+                location: {
+                    name: "Photofeed",
+                    latitude: 48.677474,
+                    longitude: 6.178464,
                 },
-                date: "2021-06-01 08:37:58",
-                created_at: "2021-07-04 23:59:03",
-                updated_at: "2021-05-07 00:25:03",
+                date: "12/11/2021",
+                heure: "7:58",
+                created_at: "2021-06-27 22:55:30",
+                updated_at: "2022-02-04 18:08:10",
             },
         };
     },
