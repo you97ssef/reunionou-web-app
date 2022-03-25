@@ -32,7 +32,6 @@ export default {
         axios
             .get("http://ip-api.com/json/")
             .then((response) => {
-                console.log(response);
                 this.center = this.markerLatLng = [
                     response.data.lat,
                     response.data.lon,
@@ -53,7 +52,6 @@ export default {
     methods: {
         zoomUpdated(zoom) {
             this.zoom = zoom;
-            console.log(this.markers);
         },
         centerUpdated(center) {
             this.center = center;
@@ -73,6 +71,9 @@ export default {
                     console.log(error);
                 });
         },
+        changePlacementByAddress(latlng){
+            this.markerLatLng = this.center = latlng;
+        }
     },
 };
 </script>

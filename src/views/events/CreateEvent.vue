@@ -59,7 +59,16 @@
                 />
             </div>
             <div class="field">
-                <!-- Adresse -->
+                <button
+                    type="button"
+                    @click="getPlaceByAddress()"
+                    class="button is-success"
+                >
+                    Get Location
+                </button>
+            </div>
+
+            <div class="field">
                 <input
                     v-model="event.location.latitude"
                     class="input"
@@ -69,7 +78,6 @@
                 />
             </div>
             <div class="field">
-                <!-- Adresse -->
                 <input
                     v-model="event.location.longitude"
                     class="input"
@@ -78,8 +86,9 @@
                     placeholder="Adresse"
                 />
             </div>
+            get
 
-            <Map :event="event" />
+            <Map :event="event" ref="map" />
             <div class="mt-5 field">
                 <button class="button is-success">Créer Evenement</button>
             </div>
@@ -88,6 +97,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import Map from "../../components/NewEventMap.vue";
 
 export default {
@@ -126,9 +136,31 @@ export default {
             //     .then((response) => {
             //         console.log(response);
             alert("Event created");
-            this.$router.push("/events/" + "ID");
+            // this.$router.push("/events/" + "ID");
             //     })
             //     .catch((err) => console.log(err));
+        },
+        getPlaceByAddress() {
+            axios
+                .get(
+                    "https://nominatim.openstreetmap.org/search?format=json&q=" +
+                        this.event.location.name
+                )
+                .then((response) => {
+                    if (response.data[0] === undefined) {
+                        alert("pas d'emplacement trouvé");
+                    } else {
+                        this.event.location.name =
+                            response.data[0].display_name;
+                        this.event.location.latitude = response.data[0].lat;
+                        this.event.location.longitude = response.data[0].lon;
+
+                        this.$refs.map.changePlacementByAddress([
+                            this.event.location.latitude,
+                            this.event.location.longitude,
+                        ]);
+                    }
+                });
         },
     },
 };
