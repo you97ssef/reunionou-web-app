@@ -8,28 +8,24 @@
         @update:center="centerUpdated"
     >
         <l-tile-layer :url="url"> </l-tile-layer>
-        <l-marker :lat-lng="markerLatLng" ></l-marker>
+        <l-marker :lat-lng="markerLatLng"></l-marker>
     </l-map>
 </template>
 
 <script>
-import {LMap, LTileLayer, LMarker} from 'vue2-leaflet';
+import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
 
 export default {
-    props: ["event"],
     components: {
         LMap,
         LTileLayer,
         LMarker,
     },
-    created(){
-        this.center = this.markerLatLng = [this.event.location.latitude, this.event.location.longitude]
-    },
     data() {
         return {
             url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-            center: [],
-            markerLatLng: [],
+            center: [0, 0],
+            markerLatLng: [0, 0],
             zoom: 16,
         };
     },
@@ -39,6 +35,9 @@ export default {
         },
         centerUpdated(center) {
             this.center = center;
+        },
+        changePlacementByAddress(latlng) {
+            this.markerLatLng = this.center = latlng;
         },
     },
 };
