@@ -4,11 +4,11 @@ import router from "./router";
 import store from "./store";
 import axios from "axios";
 
-Vue.prototype.$usersApi = axios.create({
+Vue.prototype.$api = axios.create({
     baseURL: "http://docketu.iutnc.univ-lorraine.fr:62015/",
 });
 
-// Vue.prototype.$eventsApi = axios.create({
+// Vue.prototype.$api = axios.create({
 // baseURL: "",
 // });
 

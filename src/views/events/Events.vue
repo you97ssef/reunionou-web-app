@@ -823,7 +823,7 @@ export default {
     },
     methods: {},
     created() {
-        // this.$eventsApi.get('events')
+        // this.$api.get('events')
         // .then(response => {
         // this.events = response.data
         // })

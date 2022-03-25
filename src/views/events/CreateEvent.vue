@@ -127,7 +127,7 @@ export default {
     methods: {
         validation() {
             // TODO: POST Create event
-            // this.$eventsApi
+            // this.$api
             //     .post(
             //         "events", //TODO URI
             //         {}, //TODO BODY

@@ -49,7 +49,7 @@ export default {
     },
     methods: {
         validation() {
-            this.$usersApi
+            this.$api
                 .post(
                     "auth",
                     {},

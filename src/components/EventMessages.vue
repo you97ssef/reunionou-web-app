@@ -114,7 +114,7 @@ export default {
         },
     },
     created() {
-        // this.$eventsApi.get('events/' + this.$route.params.id + "/messages")
+        // this.$api.get('events/' + this.$route.params.id + "/messages")
         // .then(response => {
         // this.messages = response.data
         // })

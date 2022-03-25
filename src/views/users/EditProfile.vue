@@ -99,7 +99,7 @@ export default {
             if (this.user.old_password !== this.user.new_password_confirm) {
                 this.error = "Passwords does not match!";
             } else {
-                this.$usersApi
+                this.$api
                     .put("users/" + this.$store.state.user.user_id, this.user)
                     .then((response) => {
                         alert(response.data);

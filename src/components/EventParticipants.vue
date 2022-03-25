@@ -12,10 +12,18 @@
                                 member.username
                             }}</span>
                         </span>
-                        - 
-                        <span class="has-text-info" v-if="member.status === -1">pas repondu</span>
-                        <span class="has-text-danger" v-else-if="member.status === 0">a dit non</span>
-                        <span class="has-text-success" v-else>sera présent</span>
+                        -
+                        <span class="has-text-info" v-if="member.status === -1"
+                            >pas repondu</span
+                        >
+                        <span
+                            class="has-text-danger"
+                            v-else-if="member.status === 0"
+                            >a dit non</span
+                        >
+                        <span class="has-text-success" v-else
+                            >sera présent</span
+                        >
                     </p>
                 </div>
             </div>
@@ -86,7 +94,7 @@ export default {
         };
     },
     created() {
-        // this.$eventsApi.get('events/' + this.$route.params.id + "/members")
+        // this.$api.get('events/' + this.$route.params.id + "/members")
         // .then(response => {
         // this.members = response.data
         // })

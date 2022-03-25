@@ -88,7 +88,7 @@ export default {
             if (this.password !== this.confirm_password) {
                 alert("Passwords does not match!");
             } else {
-                this.$usersApi
+                this.$api
                     .post("users", this.user)
                     .then((response) => {
                         alert(response.data);

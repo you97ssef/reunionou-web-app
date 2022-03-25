@@ -107,7 +107,7 @@ export default {
             this.shareCard = !this.shareCard;
         },
         changeStatus(status) {
-            // this.$eventsApi.put('members/' + memberId)
+            // this.$api.put('members/' + memberId)
             // .then(response => {
             // status = new status
             // })
@@ -117,7 +117,7 @@ export default {
         },
     },
     created() {
-        // this.$eventsApi.get('events/' + this.$route.params.id)
+        // this.$api.get('events/' + this.$route.params.id)
         // .then(response => {
         // this.event = response.data
         // })

@@ -66,7 +66,7 @@ export default {
         },
     },
     created() {
-        this.$usersApi
+        this.$api
             .get("users")
             .then((response) => {
                 this.users = response.data;
@@ -74,7 +74,7 @@ export default {
             .catch((err) => {
                 console.log(err);
             });
-        // this.$eventsApi.get('events/' + this.$route.params.id)
+        // this.$api.get('events/' + this.$route.params.id)
         // .then(response => {
         // this.event = response.data
         // })
