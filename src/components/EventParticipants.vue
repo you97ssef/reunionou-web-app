@@ -41,14 +41,19 @@ export default {
         };
     },
     created() {
-        this.$api
-            .get("events/" + this.$route.params.id + "/members")
-            .then((response) => {
-                this.members = response.data.member;
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        this.reloadMembers();
+    },
+    methods: {
+        reloadMembers() {
+            this.$api
+                .get("events/" + this.$route.params.id + "/members")
+                .then((response) => {
+                    this.members = response.data.member;
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
     },
 };
 </script>

@@ -6,15 +6,14 @@
             </button>
         </div>
         <form class="m-3" @submit.prevent="validation()">
-            <h2 class="title is-5 has-text-centered">{{ event.title }}</h2>
-            <label for="user">Add existing user</label>
+            <label for="user">Ajouter utilisateur comme participant</label>
             <div class="field">
                 <div class="select is-fullwidth">
-                    <select id="user">
+                    <select id="user" required v-model="selected_user">
                         <option
                             v-for="user in users"
                             :key="user.user_id"
-                            value="user.user_id"
+                            :value="user"
                         >
                             {{ user.user_fullname }}
                         </option>
@@ -22,7 +21,7 @@
                 </div>
             </div>
             <div class="field has-text-right">
-                <button class="button is-success">Add User</button>
+                <button class="button is-success">Ajouter participant</button>
             </div>
         </form>
 
@@ -53,10 +52,21 @@ export default {
         return {
             url: "http://localhost:8080/#/invite/",
             users: [],
+            selected_user: {},
         };
     },
     methods: {
-        validation() {},
+        validation() {
+            this.$api
+                .post("members", {
+                    user_id: "/users/" + this.selected_user.user_id,
+                    event_id: this.$route.params.id,
+                    pseudo: this.selected_user.user_fullname,
+                })
+                .then(() => {
+                    this.$parent.reloadMembers();
+                });
+        },
         copy() {
             navigator.clipboard.writeText(this.url);
             alert("Vous avez copiez l'url");

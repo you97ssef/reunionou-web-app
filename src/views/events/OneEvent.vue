@@ -54,7 +54,7 @@
                             @toggleShareCard="toggleShareCard()"
                         />
                     </div>
-                    <Participant />
+                    <Participants ref="members" />
                 </div>
             </div>
         </div>
@@ -66,14 +66,14 @@
 </template>
 
 <script>
-import Participant from "../../components/EventParticipants.vue";
+import Participants from "../../components/EventParticipants.vue";
 import ShareEvent from "../../components/ShareEvent.vue";
 import Messages from "../../components/EventMessages.vue";
 import Map from "../../components/EventMap.vue";
 
 export default {
     components: {
-        Participant,
+        Participants,
         Messages,
         ShareEvent,
         Map,
@@ -95,6 +95,9 @@ export default {
     methods: {
         toggleShareCard() {
             this.shareCard = !this.shareCard;
+        },
+        reloadMembers() {
+            this.$refs.members.reloadMembers();
         },
         changeStatus(status) {
             // this.$api.put('members/' + memberId)
