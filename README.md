@@ -27,3 +27,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 -   Page d'acceuill pour presentation de reunionou
 -   Titre pour toute les page
 -   Edit profile a button
+-   Put Event
