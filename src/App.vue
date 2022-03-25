@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <Navbar :username="this.$store.state.user.username" @deconnect="deconnect" />
+        <Navbar :username="this.$store.state.user.user_fullname" @deconnect="deconnect" />
         <section class="section">
             <div class="container">
                 <router-view />

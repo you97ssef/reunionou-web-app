@@ -50,10 +50,10 @@
                 />
             </div>
             <div class="field">
-                <label for="confirm_password">Confirmer mot de passe</label>
+                <label for="password_confirm">Confirmer mot de passe</label>
                 <input
-                    id="confirm_password"
-                    v-model="user.confirm_password"
+                    id="password_confirm"
+                    v-model="user.password_confirm"
                     class="input"
                     type="password"
                     required
@@ -79,7 +79,7 @@ export default {
                 email: "",
                 username: "",
                 password: "",
-                confirm_password: "",
+                password_confirm: "",
             },
         };
     },
@@ -88,19 +88,13 @@ export default {
             if (this.password !== this.confirm_password) {
                 alert("Passwords does not match!");
             } else {
-                // TODO: POST Create user
-                // this.$usersApi
-                //     .post(
-                //         "URI", //TODO URI
-                //         {}, //TODO BODY
-                //         {} //TODO HEADERS
-                //     )
-                //     .then((response) => {
-                //         console.log(response);
-                alert("User created");
-                this.$router.push("/login");
-                //     })
-                //     .catch((err) => console.log(err));
+                this.$api
+                    .post("users", this.user)
+                    .then((response) => {
+                        alert(response.data);
+                        this.$router.push("/login");
+                    })
+                    .catch((err) => console.log(err));
             }
         },
     },

@@ -2,17 +2,15 @@
     <div>
         <div class="columns is-multiline is-mobile">
             <div class="column is-half-tablet is-full-mobile">
-                <Map :event="event" />
+                <Map ref="map" />
             </div>
             <div class="column is-half-tablet is-full-mobile">
                 <h1 class="title has-text-centered">{{ event.title }}</h1>
                 <h3 class="m-3 title is-5 has-text-centered">
-                    Date de l'evenement: {{ event.date }}
+                    Date de l'evenement: {{ event.date }} - {{ event.heure }}
                 </h3>
 
-                <p class="title is-5 has-text-link">
-                    Createur: {{ event.author }}
-                </p>
+                <p class="title is-5 has-text-link">Createur: {{ creator }}</p>
 
                 <p class="m-5">
                     {{ event.description }}
@@ -56,7 +54,7 @@
                             @toggleShareCard="toggleShareCard()"
                         />
                     </div>
-                    <Participant />
+                    <Participants ref="members" />
                 </div>
             </div>
         </div>
@@ -68,14 +66,14 @@
 </template>
 
 <script>
-import Participant from "../../components/EventParticipants.vue";
+import Participants from "../../components/EventParticipants.vue";
 import ShareEvent from "../../components/ShareEvent.vue";
 import Messages from "../../components/EventMessages.vue";
 import Map from "../../components/EventMap.vue";
 
 export default {
     components: {
-        Participant,
+        Participants,
         Messages,
         ShareEvent,
         Map,
@@ -85,29 +83,24 @@ export default {
             status: -1,
             shareCard: false,
             event: {
-                id: "e04cc94c-77a7-4671-8e52-34eb1d781d57",
-                title: "Dr. Dolittle",
-                description:
-                    "Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sitet, sem. Fusce consequat. Nulla nisl. Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus.",
-                user_id: "/users/73beeb05-f733-4a1b-b425-dc82c2bce9ae",
                 location: {
-                    name: "Photofeed",
-                    latitude: 48.677474,
-                    longitude: 6.178464,
+                    name: "Location",
+                    latitude: 0,
+                    longitude: 0,
                 },
-                date: "12/11/2021",
-                heure: "7:58",
-                created_at: "2021-06-27 22:55:30",
-                updated_at: "2022-02-04 18:08:10",
             },
+            creator: "User",
         };
     },
     methods: {
         toggleShareCard() {
             this.shareCard = !this.shareCard;
         },
+        reloadMembers() {
+            this.$refs.members.reloadMembers();
+        },
         changeStatus(status) {
-            // this.$eventsApi.put('members/' + memberId)
+            // this.$api.put('members/' + memberId)
             // .then(response => {
             // status = new status
             // })
@@ -117,14 +110,25 @@ export default {
         },
     },
     created() {
-        // this.$eventsApi.get('events/' + this.$route.params.id)
-        // .then(response => {
-        // this.event = response.data
-        // })
-        // .catch((err) => {
-        //console.log(err)
-        // this.$router.push("/404");
-        // });
+        this.$api
+            .get("events/" + this.$route.params.id)
+            .then((response) => {
+                this.event = response.data.event;
+
+                this.$refs.map.changePlacementByAddress([
+                    this.event.location.latitude,
+                    this.event.location.longitude,
+                ]);
+
+                this.$api
+                    .get(this.event.user_id)
+                    .then(
+                        (response) => (this.creator = response.data.fullname)
+                    );
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     },
 };
 </script>

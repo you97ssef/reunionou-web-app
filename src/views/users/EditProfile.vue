@@ -50,10 +50,10 @@
                 />
             </div>
             <div class="field">
-                <label for="password">Nouveau mot de passe</label>
+                <label for="new_password">Nouveau mot de passe</label>
                 <input
-                    id="password"
-                    v-model="user.password"
+                    id="new_password"
+                    v-model="user.new_password"
                     class="input"
                     type="password"
                     required
@@ -61,10 +61,10 @@
                 />
             </div>
             <div class="field">
-                <label for="confirm_password">Confirmer mot de passe</label>
+                <label for="new_password_confirm">Confirmer mot de passe</label>
                 <input
-                    id="confirm_password"
-                    v-model="user.confirm_password"
+                    id="new_password_confirm"
+                    v-model="user.new_password_confirm"
                     class="input"
                     type="password"
                     required
@@ -84,34 +84,28 @@ export default {
     data() {
         return {
             user: {
-                fullname: "",
-                email: "",
-                username: "",
-                password: "",
-                confirm_password: "",
-                old_password: "",
+                fullname: this.$store.state.user.user_fullname,
+                email: this.$store.state.user.user_email,
+                username: this.$store.state.user.user_username,
+                old_password: "hellomalek",
+                new_password: "hellomalek",
+                new_password_confirm: "hellomalek",
             },
             error: null,
         };
     },
     methods: {
         validation() {
-            if (this.user.password !== this.user.confirm_password) {
+            if (this.user.old_password !== this.user.new_password_confirm) {
                 this.error = "Passwords does not match!";
             } else {
-                // TODO: PUT Edit user
-                // this.$usersApi
-                //     .put(
-                //         "URI", //TODO URI
-                //         {}, //TODO BODY
-                //         {} //TODO HEADERS
-                //     )
-                //     .then((response) => {
-                //         console.log(response);
-                alert("Profile modified");
-                this.$router.push("/");
-                //     })
-                //     .catch((err) => console.log(err));
+                this.$api
+                    .put("users/" + this.$store.state.user.user_id, this.user)
+                    .then((response) => {
+                        alert(response.data);
+                        this.$router.push("/");
+                    })
+                    .catch((err) => console.log(err));
             }
         },
     },

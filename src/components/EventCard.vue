@@ -8,7 +8,7 @@
                         {{ event.title }}
                     </p>
                     <p class="subtitle is-6">
-                        {{ event.date }}
+                        {{ event.date }} - {{ event.heure }}
                     </p>
                 </div>
             </router-link>
