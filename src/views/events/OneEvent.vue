@@ -23,6 +23,21 @@
                     {{ event.location.address }}
                 </h3>
 
+                <div v-if="status === -1">
+                    <button
+                        @click="changeStatus()"
+                        class="button is-success is-small m-1"
+                    >
+                        Je viens
+                    </button>
+                    <button
+                        @click="changeStatus()"
+                        class="button is-danger is-small m-1"
+                    >
+                        désolé
+                    </button>
+                </div>
+
                 <div class="column">
                     <h3 class="m-3 title is-5 has-text-centered">
                         Participants
@@ -67,6 +82,7 @@ export default {
     },
     data() {
         return {
+            status: -1,
             shareCard: false,
             event: {
                 id: "e04cc94c-77a7-4671-8e52-34eb1d781d57",
@@ -89,6 +105,15 @@ export default {
     methods: {
         toggleShareCard() {
             this.shareCard = !this.shareCard;
+        },
+        changeStatus(status) {
+            // this.$eventsApi.put('members/' + memberId)
+            // .then(response => {
+            // status = new status
+            // })
+            // .catch((err) => {
+            //console.log(err)
+            // });
         },
     },
     created() {
