@@ -86,7 +86,6 @@
                     placeholder="Adresse"
                 />
             </div>
-            get
 
             <Map :event="event" ref="map" />
             <div class="mt-5 field">
@@ -107,11 +106,9 @@ export default {
     data() {
         return {
             event: {
-                id: "e04cc94c-77a7-4671-8e52-34eb1d781d57",
-                title: "Dr. Dolittle",
-                description:
-                    "Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sitet, sem. Fusce consequat. Nulla nisl. Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus.",
-                user_id: "/users/73beeb05-f733-4a1b-b425-dc82c2bce9ae",
+                title: "",
+                description: "",
+                user_id: "/users/" + this.$store.state.user.user_id,
                 location: {
                     name: "Photofeed",
                     latitude: 48.677474,
@@ -119,26 +116,18 @@ export default {
                 },
                 date: "12/11/2021",
                 heure: "7:58",
-                created_at: "2021-06-27 22:55:30",
-                updated_at: "2022-02-04 18:08:10",
             },
         };
     },
     methods: {
         validation() {
-            // TODO: POST Create event
-            // this.$api
-            //     .post(
-            //         "events", //TODO URI
-            //         {}, //TODO BODY
-            //         {} //TODO HEADERS
-            //     )
-            //     .then((response) => {
-            //         console.log(response);
-            alert("Event created");
-            // this.$router.push("/events/" + "ID");
-            //     })
-            //     .catch((err) => console.log(err));
+            this.$api
+                .post("events", this.event)
+                .then((response) => {
+                    alert("Event created");
+                    this.$router.push("/events/" + response.data.event.id);
+                })
+                .catch((err) => console.log(err));
         },
         getPlaceByAddress() {
             axios

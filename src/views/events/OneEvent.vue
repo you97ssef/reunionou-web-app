@@ -85,8 +85,8 @@ export default {
             event: {
                 location: {
                     name: "Location",
-                    latitude: 48.677474,
-                    longitude: 6.178464,
+                    latitude: 0,
+                    longitude: 0,
                 },
             },
             creator: "User",
@@ -111,7 +111,6 @@ export default {
             .get("events/" + this.$route.params.id)
             .then((response) => {
                 this.event = response.data.event;
-                this.event.location = JSON.parse(response.data.event.location);
 
                 this.$refs.map.changePlacementByAddress([
                     this.event.location.latitude,
