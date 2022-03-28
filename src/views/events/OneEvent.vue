@@ -23,13 +23,13 @@
 
                 <div v-if="status === -1">
                     <button
-                        @click="changeStatus()"
+                        @click="changeStatus(1)"
                         class="button is-success is-small m-1"
                     >
                         Je viens
                     </button>
                     <button
-                        @click="changeStatus()"
+                        @click="changeStatus(0)"
                         class="button is-danger is-small m-1"
                     >
                         désolé
@@ -102,13 +102,23 @@ export default {
             this.$refs.members.reloadMembers();
         },
         changeStatus(status) {
-            // this.$api.put('members/' + memberId)
-            // .then(response => {
-            // status = new status
-            // })
-            // .catch((err) => {this.flashMessage.error({
-            //               message: "Impossible de changer le status.",
-            //          }));
+            //TODO member id
+            this.$api
+                .put("members/" + "e63ee504-1b42-4003-b2f8-e2c223af1e32", {
+                    user_id: this.$store.state.user.user_id,
+                    event_id: this.$route.params.id,
+                    pseudo: this.$store.state.user.user_username, //TODO or pseudo de guest
+                    status: status,
+                })
+                .then((response) => {
+                    console.log(response.data);
+                    this.reloadMembers();
+                })
+                .catch((err) => {
+                    this.flashMessage.error({
+                        message: "Impossible de changer le status.",
+                    });
+                });
         },
     },
     created() {
