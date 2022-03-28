@@ -12,14 +12,19 @@ export default new Vuex.Store({
     state: {
         token: "",
         user: false,
+        guest: false,
     },
     getters: {},
     mutations: {
         setToken(state, token) {
             state.token = token;
+            state.guest = false;
         },
         setUser(state, user) {
             state.user = user;
+        },
+        setGuest(state, guest) {
+            state.guest = guest;
         },
     },
     actions: {},

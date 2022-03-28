@@ -40,19 +40,21 @@
                     <h3 class="m-3 title is-5 has-text-centered">
                         Participants
                     </h3>
-                    <div v-if="!shareCard" class="field has-text-centered">
-                        <button
-                            @click="toggleShareCard()"
-                            class="button is-link is-small"
-                        >
-                            Ajouter participant
-                        </button>
-                    </div>
-                    <div v-else>
-                        <ShareEvent
-                            :event="event"
-                            @toggleShareCard="toggleShareCard()"
-                        />
+                    <div v-if="this.$store.state.user">
+                        <div v-if="!shareCard" class="field has-text-centered">
+                            <button
+                                @click="toggleShareCard()"
+                                class="button is-link is-small"
+                            >
+                                Ajouter participant
+                            </button>
+                        </div>
+                        <div v-else>
+                            <ShareEvent
+                                :event="event"
+                                @toggleShareCard="toggleShareCard()"
+                            />
+                        </div>
                     </div>
                     <Participants ref="members" />
                 </div>

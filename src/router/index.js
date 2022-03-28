@@ -10,8 +10,11 @@ import EditProfile from "../views/users/EditProfile";
 import Events from "../views/events/Events";
 import CreateEvent from "../views/events/CreateEvent";
 import OneEvent from "../views/events/OneEvent";
+import Invite from "../views/events/Invite";
 
-import store from '@/store/index.js';
+import NotFound from "../views/NotFound";
+
+import store from "@/store/index.js";
 
 Vue.use(VueRouter);
 
@@ -24,7 +27,8 @@ function authGuard(to, from, next) {
 }
 
 function authGuardOrGuest(to, from, next) {
-    if (store.state.user) { //TODO ADD allow for guest
+    if (store.state.user || store.state.guest) {
+        //TODO ADD allow for guest
         next(); // allow to enter route
     } else {
         next("/login"); // go to '/login';
@@ -44,25 +48,30 @@ const routes = [
         path: "/",
         name: "events",
         component: Events,
-        beforeEnter: authGuard
+        beforeEnter: authGuard,
+    },
+    {
+        path: "/invite/:id",
+        name: "invite",
+        component: Invite,
     },
     {
         path: "/new-event",
         name: "new-event",
         component: CreateEvent,
-        beforeEnter: authGuard
+        beforeEnter: authGuard,
     },
     {
         path: "/events/:id",
         name: "one-event",
         component: OneEvent,
-        beforeEnter: authGuardOrGuest
+        beforeEnter: authGuardOrGuest,
     },
     {
         path: "/login",
         name: "login",
         component: Login,
-        beforeEnter: isAuthGuard
+        beforeEnter: isAuthGuard,
     },
     {
         path: "/register",
@@ -73,7 +82,12 @@ const routes = [
         path: "/edit-profile",
         name: "edit-profile",
         component: EditProfile,
-        beforeEnter: authGuard
+        beforeEnter: authGuard,
+    },
+    {
+        path: "*",
+        name: "not-found",
+        component: NotFound,
     },
 ];
 
