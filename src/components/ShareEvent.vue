@@ -59,9 +59,10 @@ export default {
         validation() {
             this.$api
                 .post("members", {
-                    user_id: "/users/" + this.selected_user.user_id,
+                    user_id: this.selected_user.user_id,
                     event_id: this.$route.params.id,
                     pseudo: this.selected_user.user_username,
+                    status: -1,
                 })
                 .then(() => {
                     this.$parent.reloadMembers();
