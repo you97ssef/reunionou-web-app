@@ -106,9 +106,9 @@ export default {
             // .then(response => {
             // status = new status
             // })
-            // .catch((err) => {
-            //console.log(err)
-            // });
+            // .catch((err) => {this.flashMessage.error({
+            //               message: "Impossible de changer le status.",
+            //          }));
         },
     },
     created() {
@@ -128,9 +128,11 @@ export default {
                         (response) => (this.creator = response.data.fullname)
                     );
             })
-            .catch((err) => {
-                console.log(err);
-            });
+            .catch((err) =>
+                this.flashMessage.error({
+                    message: "Impossible d'obtenir l'evenement.",
+                })
+            );
     },
 };
 </script>

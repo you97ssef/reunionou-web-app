@@ -124,10 +124,16 @@ export default {
             this.$api
                 .post("events", this.event)
                 .then((response) => {
-                    alert("Event created");
+                    this.flashMessage.success({
+                        message: "Evenement crée.",
+                    });
                     this.$router.push("/events/" + response.data.event.id);
                 })
-                .catch((err) => console.log(err));
+                .catch((err) =>
+                    this.flashMessage.error({
+                        message: "Impossible de créer l'evenement.",
+                    })
+                );
         },
         getPlaceByAddress() {
             axios
@@ -137,7 +143,9 @@ export default {
                 )
                 .then((response) => {
                     if (response.data[0] === undefined) {
-                        alert("pas d'emplacement trouvé");
+                        this.flashMessage.error({
+                            message: "Pas d'emplacement trouvé.",
+                        });
                     } else {
                         this.event.location.name =
                             response.data[0].display_name;

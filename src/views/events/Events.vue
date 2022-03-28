@@ -33,14 +33,21 @@ export default {
                 console.log(response.data);
                 this.events = response.data.events;
             })
-            .catch((err) => console.log(err));
-        this.$api
+            .catch((err) =>
+                this.flashMessage.error({
+                    message: "Impossible d'obtenir les evenements.",
+                })
+            );
+        /*this.$api
             .get("users/" + this.$store.state.user.user_id + "/members")
             .then((response) => {
-                console.log(response.data);
                 this.events += response.data.events;
             })
-            .catch((err) => console.log(err));
+            .catch((err) =>
+                this.flashMessage.error({
+                    message: "Impossible d'obtenir les evenements.",
+                })
+            );*/
     },
 };
 </script>

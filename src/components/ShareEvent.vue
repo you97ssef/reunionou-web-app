@@ -65,11 +65,18 @@ export default {
                 })
                 .then(() => {
                     this.$parent.reloadMembers();
-                });
+                })
+                .catch((err) =>
+                    this.flashMessage.error({
+                        message: "Impossible d'ajouter un membre.",
+                    })
+                );
         },
         copy() {
             navigator.clipboard.writeText(this.url);
-            alert("Vous avez copiez l'url");
+            this.flashMessage.success({
+                message: "Vous aves copiez l'url.",
+            });
         },
         toggleShareCard() {
             this.$emit("toggleShareCard");
@@ -81,17 +88,11 @@ export default {
             .then((response) => {
                 this.users = response.data;
             })
-            .catch((err) => {
-                console.log(err);
-            });
-        // this.$api.get('events/' + this.$route.params.id)
-        // .then(response => {
-        // this.event = response.data
-        // })
-        // .catch((err) => {
-        //console.log(err)
-        // this.$router.push("/404");
-        // });
+            .catch((err) =>
+                this.flashMessage.error({
+                    message: "Impossible d'obtenir les utilisateurs.",
+                })
+            );
         this.url += this.event.id;
     },
 };

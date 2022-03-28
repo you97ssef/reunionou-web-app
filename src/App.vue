@@ -1,11 +1,15 @@
 <template>
     <div id="app">
-        <Navbar :username="this.$store.state.user.user_fullname" @deconnect="deconnect" />
+        <Navbar
+            :username="this.$store.state.user.user_fullname"
+            @deconnect="deconnect"
+        />
         <section class="section">
             <div class="container">
                 <router-view />
             </div>
         </section>
+        <FlashMessage :position="'right bottom'"></FlashMessage>
     </div>
 </template>
 
@@ -22,8 +26,6 @@ export default {
     },
     components: {
         Navbar,
-    },
-    mounted() {
     },
     methods: {
         deconnect() {

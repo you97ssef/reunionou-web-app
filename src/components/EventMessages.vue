@@ -37,7 +37,6 @@ export default {
     },
     methods: {
         send() {
-            console.log(this.message);
             this.$api
                 .post("messages/", {
                     content: this.newMessage,
@@ -49,7 +48,15 @@ export default {
                 .then((response) => {
                     this.messages.push(response.data.message);
                     this.newMessage = "";
-                });
+                    this.flashMessage.success({
+                        message: "Message envoyé.",
+                    });
+                })
+                .catch((err) =>
+                    this.flashMessage.error({
+                        message: "Message non envoyé.",
+                    })
+                );
         },
     },
     created() {
@@ -61,9 +68,11 @@ export default {
                     return new Date(a.created_at) - new Date(b.created_at);
                 });
             })
-            .catch((err) => {
-                console.log(err);
-            });
+            .catch((err) =>
+                this.flashMessage.error({
+                    message: "Impossible d'obtenir les messages.",
+                })
+            );
     },
 };
 </script>

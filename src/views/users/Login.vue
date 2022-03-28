@@ -43,8 +43,8 @@ import jwt_decode from "jwt-decode";
 export default {
     data() {
         return {
-            email: "test@mail.fr",
-            password: "hellomalek",
+            email: "",
+            password: "",
         };
     },
     methods: {
@@ -71,7 +71,11 @@ export default {
                     );
                     this.$router.push("/");
                 })
-                .catch((err) => console.log(err));
+                .catch((err) =>
+                    this.flashMessage.error({
+                        message: "Impossible de se connecter.",
+                    })
+                );
         },
     },
 };

@@ -102,10 +102,17 @@ export default {
                 this.$api
                     .put("users/" + this.$store.state.user.user_id, this.user)
                     .then((response) => {
-                        alert(response.data);
+                        this.flashMessage.success({
+                            message: "Compte modifié.",
+                        });
+                        //TODO change data in the state
                         this.$router.push("/");
                     })
-                    .catch((err) => console.log(err));
+                    .catch((err) =>
+                        this.flashMessage.error({
+                            message: "Impossible de modifier le compte.",
+                        })
+                    );
             }
         },
     },

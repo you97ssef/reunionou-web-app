@@ -39,7 +39,6 @@ export default {
     },
     methods: {
         validation() {
-            console.log(this.pseudo);
             this.$store.commit("setGuest", { guest: this.pseudo });
             this.$router.push("/events/" + this.$route.params.id);
 
@@ -52,11 +51,12 @@ export default {
             //         }
             //     )
             //     .then((response) => {
-            //         console.log(response.data);
             //         this.$store.commit("setGuest", response.data.guest);
             //         this.$router.push("/events/" + this.$route.params.id);
             //     })
-            //     .catch((err) => console.log(err));
+            //     .catch((err) => this.flashMessage.error({
+            //  message: "Impossible de se connecter.",
+            //}));
         },
     },
 };

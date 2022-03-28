@@ -29,17 +29,12 @@ export default {
             this.event.location.latitude,
             this.event.location.longitude,
         ];
-        axios
-            .get("http://ip-api.com/json/")
-            .then((response) => {
-                this.center = this.markerLatLng = [
-                    response.data.lat,
-                    response.data.lon,
-                ];
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        axios.get("http://ip-api.com/json/").then((response) => {
+            this.center = this.markerLatLng = [
+                response.data.lat,
+                response.data.lon,
+            ];
+        });
     },
     data() {
         return {
@@ -66,14 +61,11 @@ export default {
                     this.event.location.name = response.data.display_name;
                     this.event.location.latitude = this.markerLatLng.lat;
                     this.event.location.longitude = this.markerLatLng.lng;
-                })
-                .catch((error) => {
-                    console.log(error);
                 });
         },
-        changePlacementByAddress(latlng){
+        changePlacementByAddress(latlng) {
             this.markerLatLng = this.center = latlng;
-        }
+        },
     },
 };
 </script>

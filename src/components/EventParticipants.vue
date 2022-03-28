@@ -50,9 +50,11 @@ export default {
                 .then((response) => {
                     this.members = response.data.member;
                 })
-                .catch((err) => {
-                    console.log(err);
-                });
+                .catch((err) =>
+                    this.flashMessage.error({
+                        message: "Impossible d'obtenir les participants.",
+                    })
+                );
         },
     },
 };

@@ -86,15 +86,23 @@ export default {
     methods: {
         validation() {
             if (this.password !== this.confirm_password) {
-                alert("Passwords does not match!");
+                this.flashMessage.error({
+                    message: "Les mots de passe ne correspondent pas.",
+                });
             } else {
                 this.$api
                     .post("users", this.user)
                     .then((response) => {
-                        alert(response.data);
+                        this.flashMessage.success({
+                            message: "Compte créé.",
+                        });
                         this.$router.push("/login");
                     })
-                    .catch((err) => console.log(err));
+                    .catch((err) =>
+                        this.flashMessage.error({
+                            message: "Impossible de créer le compte.",
+                        })
+                    );
             }
         },
     },
