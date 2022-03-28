@@ -127,7 +127,18 @@ export default {
                     this.flashMessage.success({
                         message: "Evenement crée.",
                     });
-                    this.$router.push("/events/" + response.data.event.id);
+                    this.$api
+                        .post("members", {
+                            user_id: this.$store.state.user.user_id,
+                            event_id: response.data.event.id,
+                            pseudo: this.$store.state.user.user_username,
+                            status: 1,
+                        })
+                        .then(() =>
+                            this.$router.push(
+                                "/events/" + response.data.event.id
+                            )
+                        );
                 })
                 .catch((err) =>
                     this.flashMessage.error({
