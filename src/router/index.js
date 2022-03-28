@@ -28,7 +28,6 @@ function authGuard(to, from, next) {
 
 function authGuardOrGuest(to, from, next) {
     if (store.state.user || store.state.guest) {
-        //TODO ADD allow for guest
         next(); // allow to enter route
     } else {
         next("/login"); // go to '/login';

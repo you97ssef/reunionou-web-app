@@ -87,7 +87,6 @@ export default {
         this.$api
             .get("users")
             .then((response) => {
-                console.log(response.data);
                 this.users = response.data;
             })
             .catch((err) =>

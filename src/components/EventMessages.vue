@@ -40,8 +40,7 @@ export default {
             this.$api
                 .post("messages/", {
                     content: this.newMessage,
-                    //TODO Member Id
-                    member_id: "b1858803-2305-47f4-be67-1efc10a91da7",
+                    member_id: this.$parent.member.id,
                     event_id: this.$route.params.id,
                     media: "{}",
                 })

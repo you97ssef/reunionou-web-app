@@ -34,7 +34,7 @@ import jwt_decode from "jwt-decode";
 export default {
     data() {
         return {
-            pseudo: "pseudo",
+            pseudo: "",
         };
     },
     methods: {
@@ -42,21 +42,22 @@ export default {
             this.$store.commit("setGuest", { guest: this.pseudo });
             this.$router.push("/events/" + this.$route.params.id);
 
-            // this.$api
-            //     .post(
-            //         "members", // TODO url of endpoint
-            //         {
-            //             pseudo: this.pseudo,
-            //             event: this.$route.params.id,
-            //         }
-            //     )
-            //     .then((response) => {
-            //         this.$store.commit("setGuest", response.data.guest);
-            //         this.$router.push("/events/" + this.$route.params.id);
-            //     })
-            //     .catch((err) => this.flashMessage.error({
-            //  message: "Impossible de se connecter.",
-            //}));
+            this.$api
+                .post("members", {
+                    pseudo: this.pseudo,
+                    event: this.$route.params.id,
+                    user_id: null,
+                    status: -1,
+                })
+                .then((response) => {
+                    this.$store.commit("setGuest", response.data.member);
+                    this.$router.push("/events/" + this.$route.params.id);
+                })
+                .catch((err) =>
+                    this.flashMessage.error({
+                        message: "Impossible de se connecter.",
+                    })
+                );
         },
     },
 };

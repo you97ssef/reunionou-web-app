@@ -102,6 +102,7 @@ export default {
             },
             creator: "User",
             meteo: false,
+            member: {},
         };
     },
     methods: {
@@ -112,16 +113,14 @@ export default {
             this.$refs.members.reloadMembers();
         },
         changeStatus(status) {
-            //TODO member id
             this.$api
-                .put("members/" + "e63ee504-1b42-4003-b2f8-e2c223af1e32", {
+                .put("members/" + this.member.id, {
                     user_id: this.$store.state.user.user_id,
                     event_id: this.$route.params.id,
-                    pseudo: this.$store.state.user.user_username, //TODO or pseudo de guest
+                    pseudo: this.member.pseudo,
                     status: status,
                 })
                 .then((response) => {
-                    console.log(response.data);
                     this.reloadMembers();
                 })
                 .catch((err) => {
@@ -143,14 +142,12 @@ export default {
                 ]);
 
                 // Meteo
-
                 axios
                     .get(
                         `http://api.weatherapi.com/v1/current.json?key=920bc19c7c4049d4ab291530222803&q=${this.event.location.latitude},${this.event.location.longitude}&lang=fr`
                     )
                     .then((response) => {
                         this.meteo = response.data.current;
-                        console.log(this.meteo);
                     });
 
                 this.$api
@@ -158,6 +155,19 @@ export default {
                     .then(
                         (response) => (this.creator = response.data.fullname)
                     );
+
+                this.$api
+                    .get(
+                        "http://docketu.iutnc.univ-lorraine.fr:62015/member?event=af3c3aa4-2fa1-48cd-9844-e1adc1e434d5&user_id=213bcf99-fda8-4d6c-9107-e0548ab0a236" //TODO
+                        // "member", {
+                        // params: {
+                        // user_id: this.$store.state.user.user_id,
+                        // event: this.$route.params.id,
+                        // },}
+                    )
+                    .then((response) => {
+                        this.member = response.data;
+                    });
             })
             .catch((err) =>
                 this.flashMessage.error({

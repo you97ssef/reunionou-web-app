@@ -28,9 +28,8 @@ export default {
     methods: {},
     created() {
         this.$api
-            .get("events" /* + this.$store.state.user.user_id + "/events"*/)
+            .get("users/" + this.$store.state.user.user_id + "/events")
             .then((response) => {
-                console.log(response.data);
                 this.events = response.data.events;
             })
             .catch((err) =>
