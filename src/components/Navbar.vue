@@ -1,7 +1,9 @@
 <template>
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <router-link to="/" class="navbar-item title m-0"> REUNIONOU </router-link>
+            <router-link to="/" class="navbar-item title m-0">
+                REUNIONOU
+            </router-link>
             <a
                 role="button"
                 v-on:click="showNav = !showNav"

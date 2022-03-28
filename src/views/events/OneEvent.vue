@@ -115,7 +115,7 @@ export default {
         changeStatus(status) {
             this.$api
                 .put("members/" + this.member.id, {
-                    user_id: this.$store.state.user.user_id,
+                    user_id: this.member.user_id,
                     event_id: this.$route.params.id,
                     pseudo: this.member.pseudo,
                     status: status,
@@ -156,14 +156,22 @@ export default {
                         (response) => (this.creator = response.data.fullname)
                     );
 
+                let params = {
+                    event: this.$route.params.id,
+                };
+
+                if (this.$store.state.user) {
+                    params.user_id = this.$store.state.user.user_id;
+                } else {
+                    params.pseudo = this.$store.state.guest.pseudo;
+                }
+
                 this.$api
                     .get(
                         "http://docketu.iutnc.univ-lorraine.fr:62015/member?event=af3c3aa4-2fa1-48cd-9844-e1adc1e434d5&user_id=213bcf99-fda8-4d6c-9107-e0548ab0a236" //TODO
                         // "member", {
-                        // params: {
-                        // user_id: this.$store.state.user.user_id,
-                        // event: this.$route.params.id,
-                        // },}
+                        // params: params
+                        //}
                     )
                     .then((response) => {
                         this.member = response.data;
