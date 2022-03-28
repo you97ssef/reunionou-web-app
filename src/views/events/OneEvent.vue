@@ -12,6 +12,14 @@
 
                 <p class="title is-5 has-text-link">Createur: {{ creator }}</p>
 
+                <p
+                    class="title is-6 has-text-info has-text-centered"
+                    v-if="meteo"
+                >
+                    <img :src="meteo.condition.icon" width="50px" alt="icon" />
+                    {{ meteo.temp_c }} C°
+                </p>
+
                 <p class="m-5">
                     {{ event.description }}
                 </p>
@@ -72,6 +80,7 @@ import Participants from "../../components/EventParticipants.vue";
 import ShareEvent from "../../components/ShareEvent.vue";
 import Messages from "../../components/EventMessages.vue";
 import Map from "../../components/EventMap.vue";
+import axios from "axios";
 
 export default {
     components: {
@@ -92,6 +101,7 @@ export default {
                 },
             },
             creator: "User",
+            meteo: false,
         };
     },
     methods: {
@@ -131,6 +141,17 @@ export default {
                     this.event.location.latitude,
                     this.event.location.longitude,
                 ]);
+
+                // Meteo
+
+                axios
+                    .get(
+                        `http://api.weatherapi.com/v1/current.json?key=920bc19c7c4049d4ab291530222803&q=${this.event.location.latitude},${this.event.location.longitude}&lang=fr`
+                    )
+                    .then((response) => {
+                        this.meteo = response.data.current;
+                        console.log(this.meteo);
+                    });
 
                 this.$api
                     .get(this.event.user_id)
