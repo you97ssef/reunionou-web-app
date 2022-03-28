@@ -61,7 +61,7 @@ export default {
                 .post("members", {
                     user_id: "/users/" + this.selected_user.user_id,
                     event_id: this.$route.params.id,
-                    pseudo: this.selected_user.user_fullname,
+                    pseudo: this.selected_user.user_username,
                 })
                 .then(() => {
                     this.$parent.reloadMembers();
@@ -86,6 +86,7 @@ export default {
         this.$api
             .get("users")
             .then((response) => {
+                console.log(response.data);
                 this.users = response.data;
             })
             .catch((err) =>
