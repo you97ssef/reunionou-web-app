@@ -87,9 +87,9 @@ export default {
                 fullname: this.$store.state.user.user_fullname,
                 email: this.$store.state.user.user_email,
                 username: this.$store.state.user.user_username,
-                old_password: "hellomalek",
-                new_password: "hellomalek",
-                new_password_confirm: "hellomalek",
+                old_password: "",
+                new_password: "",
+                new_password_confirm: "",
             },
             error: null,
         };
@@ -101,11 +101,13 @@ export default {
             } else {
                 this.$api
                     .put("users/" + this.$store.state.user.user_id, this.user)
-                    .then((response) => {
+                    .then(() => {
                         this.flashMessage.success({
                             message: "Compte modifié.",
                         });
-                        //TODO change data in the state
+
+                        this.$store.commit("setEditUser", this.user);
+
                         this.$router.push("/");
                     })
                     .catch((err) =>

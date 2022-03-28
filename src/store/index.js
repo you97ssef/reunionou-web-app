@@ -23,6 +23,11 @@ export default new Vuex.Store({
         setUser(state, user) {
             state.user = user;
         },
+        setEditUser(state, user) {
+            state.user.user_fullname = user.fullname;
+            state.user.user_email = user.email;
+            state.user.user_username = user.username;
+        },
         setGuest(state, guest) {
             state.guest = guest;
         },
