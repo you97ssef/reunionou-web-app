@@ -37,16 +37,6 @@ export default {
                     message: "Impossible d'obtenir les evenements.",
                 })
             );
-        /*this.$api
-            .get("users/" + this.$store.state.user.user_id + "/members")
-            .then((response) => {
-                this.events += response.data.events;
-            })
-            .catch((err) =>
-                this.flashMessage.error({
-                    message: "Impossible d'obtenir les evenements.",
-                })
-            );*/
     },
 };
 </script>

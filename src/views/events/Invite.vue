@@ -39,25 +39,42 @@ export default {
     },
     methods: {
         validation() {
-            this.$store.commit("setGuest", { guest: this.pseudo });
-            this.$router.push("/events/" + this.$route.params.id);
+            let params = {
+                event: this.$route.params.id,
+                pseudo: this.pseudo,
+            };
 
             this.$api
-                .post("members", {
-                    pseudo: this.pseudo,
-                    event: this.$route.params.id,
-                    user_id: null,
-                    status: -1,
+                .get("member", {
+                    params: params,
                 })
                 .then((response) => {
-                    this.$store.commit("setGuest", response.data.member);
-                    this.$router.push("/events/" + this.$route.params.id);
-                })
-                .catch((err) =>
-                    this.flashMessage.error({
-                        message: "Impossible de se connecter.",
-                    })
-                );
+                    if (response.data === null) {
+                        this.$api
+                            .post("members", {
+                                pseudo: this.pseudo,
+                                event_id: this.$route.params.id,
+                                user_id: null,
+                            })
+                            .then((response) => {
+                                this.$store.commit(
+                                    "setGuest",
+                                    response.data.member
+                                );
+                                this.$router.push(
+                                    "/events/" + this.$route.params.id
+                                );
+                            })
+                            .catch((err) =>
+                                this.flashMessage.error({
+                                    message: "Impossible de se connecter.",
+                                })
+                            );
+                    } else {
+                        this.$store.commit("setGuest", response.data);
+                        this.$router.push("/events/" + this.$route.params.id);
+                    }
+                });
         },
     },
 };

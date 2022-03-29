@@ -156,26 +156,21 @@ export default {
                         (response) => (this.creator = response.data.fullname)
                     );
 
-                let params = {
-                    event: this.$route.params.id,
-                };
-
                 if (this.$store.state.user) {
-                    params.user_id = this.$store.state.user.user_id;
+                    this.$api
+                        .get("member", {
+                            params: {
+                                event: this.$route.params.id,
+                                user_id: this.$store.state.user.user_id,
+                            },
+                        })
+                        .then((response) => {
+                            console.log(response.data);
+                            this.member = response.data;
+                        });
                 } else {
-                    params.pseudo = this.$store.state.guest.pseudo;
+                    this.member = this.$store.state.guest;
                 }
-
-                this.$api
-                    .get(
-                        "http://docketu.iutnc.univ-lorraine.fr:62015/member?event=af3c3aa4-2fa1-48cd-9844-e1adc1e434d5&user_id=213bcf99-fda8-4d6c-9107-e0548ab0a236" //TODO
-                        // "member", {
-                        // params: params
-                        //}
-                    )
-                    .then((response) => {
-                        this.member = response.data;
-                    });
             })
             .catch((err) =>
                 this.flashMessage.error({
