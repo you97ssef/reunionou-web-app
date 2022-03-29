@@ -1,6 +1,6 @@
 <template>
     <div class="m-5 box">
-        <h2 class="title is-2 has-text-centered">Créer un evenement</h2>
+        <h2 class="title is-2 has-text-centered">Modifier un evenement</h2>
         <form class="m-3" @submit.prevent="validation()">
             <div class="field">
                 <label for="title">Titre</label>
@@ -89,7 +89,7 @@
 
             <Map :event="event" ref="map" />
             <div class="mt-5 field">
-                <button class="button is-success">Créer Evenement</button>
+                <button class="button is-success">Modifier Evenement</button>
             </div>
         </form>
     </div>
@@ -106,39 +106,33 @@ export default {
     data() {
         return {
             event: {
-                title: "",
-                description: "",
-                user_id: this.$store.state.user.user_id,
                 location: {
                     name: "",
                     latitude: 48.677474,
                     longitude: 6.178464,
                 },
-                date: new Date().toISOString().slice(0, 10),
-                heure: "7:58",
             },
         };
+    },
+    mounted() {
+        this.$api.get("events/" + this.$route.params.id).then((response) => {
+            this.event = response.data.event;
+            this.event.heure = response.data.event.heure.slice(0, -3);
+            this.$refs.map.changePlacementByAddress([
+                this.event.location.latitude,
+                this.event.location.longitude,
+            ]);
+        });
     },
     methods: {
         validation() {
             this.$api
-                .post("events", this.event)
+                .put("events/" + this.$route.params.id, this.event)
                 .then((response) => {
                     this.flashMessage.success({
-                        message: "Evenement crée.",
+                        message: "Evenement Modifié.",
                     });
-                    this.$api
-                        .post("members", {
-                            user_id: this.$store.state.user.user_id,
-                            event_id: response.data.event.id,
-                            pseudo: this.$store.state.user.user_username,
-                            status: 1,
-                        })
-                        .then(() =>
-                            this.$router.push(
-                                "/events/" + response.data.event.id
-                            )
-                        );
+                    this.$router.push("/events/" + this.$route.params.id);
                 })
                 .catch((err) =>
                     this.flashMessage.error({

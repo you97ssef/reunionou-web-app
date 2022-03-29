@@ -9,6 +9,7 @@ import EditProfile from "../views/users/EditProfile";
 // Events Views
 import Events from "../views/events/Events";
 import CreateEvent from "../views/events/CreateEvent";
+import EditEvent from "../views/events/EditEvent";
 import OneEvent from "../views/events/OneEvent";
 import Invite from "../views/events/Invite";
 
@@ -58,6 +59,12 @@ const routes = [
         path: "/new-event",
         name: "new-event",
         component: CreateEvent,
+        beforeEnter: authGuard,
+    },
+    {
+        path: "/edit-event/:id",
+        name: "edit-event",
+        component: EditEvent,
         beforeEnter: authGuard,
     },
     {

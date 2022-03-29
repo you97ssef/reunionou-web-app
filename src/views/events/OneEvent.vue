@@ -6,11 +6,26 @@
             </div>
             <div class="column is-half-tablet is-full-mobile">
                 <h1 class="title has-text-centered">{{ event.title }}</h1>
+
+                <div class="has-text-centered">
+                    <router-link
+                        class="button is-warning is-small is-centered"
+                        :to="'/edit-event/' + this.$route.params.id"
+                        v-if="
+                            this.creator.id === this.$store.state.user.user_id
+                        "
+                    >
+                        Modifier l'evenement</router-link
+                    >
+                </div>
+
                 <h3 class="m-3 title is-5 has-text-centered">
                     Date de l'evenement: {{ event.date }} - {{ event.heure }}
                 </h3>
 
-                <p class="title is-5 has-text-link">Createur: {{ creator }}</p>
+                <p class="title is-5 has-text-link">
+                    Createur: {{ creator.fullname }}
+                </p>
 
                 <p
                     class="title is-6 has-text-info has-text-centered"
@@ -100,7 +115,7 @@ export default {
                     longitude: 0,
                 },
             },
-            creator: "User",
+            creator: {},
             meteo: false,
             member: {},
         };
@@ -153,9 +168,9 @@ export default {
 
                 this.$api
                     .get("users/" + this.event.user_id)
-                    .then(
-                        (response) => (this.creator = response.data.fullname)
-                    );
+                    .then((response) => {
+                        this.creator = response.data;
+                    });
 
                 if (this.$store.state.user) {
                     this.$api
