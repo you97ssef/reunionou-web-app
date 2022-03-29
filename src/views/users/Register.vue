@@ -85,7 +85,7 @@ export default {
     },
     methods: {
         validation() {
-            if (this.password !== this.confirm_password) {
+            if (this.user.password !== this.user.password_confirm) {
                 this.flashMessage.error({
                     message: "Les mots de passe ne correspondent pas.",
                 });
