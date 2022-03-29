@@ -152,7 +152,7 @@ export default {
                     });
 
                 this.$api
-                    .get(this.event.user_id)
+                    .get("users/" + this.event.user_id)
                     .then(
                         (response) => (this.creator = response.data.fullname)
                     );

@@ -29,8 +29,6 @@
 </template>
 
 <script>
-import jwt_decode from "jwt-decode";
-
 export default {
     data() {
         return {
@@ -55,6 +53,7 @@ export default {
                                 pseudo: this.pseudo,
                                 event_id: this.$route.params.id,
                                 user_id: null,
+                                status: -1,
                             })
                             .then((response) => {
                                 this.$store.commit(
