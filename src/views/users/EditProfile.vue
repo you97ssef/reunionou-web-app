@@ -56,7 +56,6 @@
                     v-model="user.new_password"
                     class="input"
                     type="password"
-                    required
                     placeholder="Mot de passe"
                 />
             </div>
@@ -67,7 +66,6 @@
                     v-model="user.new_password_confirm"
                     class="input"
                     type="password"
-                    required
                     placeholder="Mot de passe"
                 />
             </div>
@@ -90,7 +88,6 @@ export default {
                 new_password: "",
                 new_password_confirm: "",
             },
-            error: null,
         };
     },
     methods: {
