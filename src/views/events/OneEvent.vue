@@ -121,6 +121,7 @@ export default {
                     status: status,
                 })
                 .then((response) => {
+                    this.member = response.data.member;
                     this.reloadMembers();
                 })
                 .catch((err) => {

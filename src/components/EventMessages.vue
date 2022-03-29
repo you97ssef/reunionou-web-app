@@ -7,7 +7,14 @@
                 </span>
                 {{ message.content }}
             </p>
-            <form @submit.prevent="send()" class="mt-4">
+            <form
+                @submit.prevent="send()"
+                v-if="
+                    this.$parent.member.status === 1 ||
+                    this.$parent.member.status === 0
+                "
+                class="mt-4"
+            >
                 <div class="field">
                     <textarea
                         class="textarea is-link"
