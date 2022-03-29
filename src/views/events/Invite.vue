@@ -67,7 +67,7 @@ export default {
                                 };
                                 this.$store.commit(
                                     "setToken",
-                                    sign(data, secret)
+                                    "Bearer " + sign(data, secret)
                                 );
 
 
@@ -93,7 +93,7 @@ export default {
                                 guest_pseudo: this.$store.state.guest.pseudo,
                             },
                         };
-                        this.$store.commit("setToken", sign(data, secret));
+                        this.$store.commit("setToken", "Bearer " + sign(data, secret));
 
                         this.$store.commit("setGuest", response.data);
                         this.$router.push("/events/" + this.$route.params.id);

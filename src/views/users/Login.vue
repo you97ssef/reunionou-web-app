@@ -63,7 +63,7 @@ export default {
                 .then((response) => {
                     this.$store.commit(
                         "setToken",
-                        response.data["refresh-token"]
+                        "Bearer " + response.data["refresh-token"]
                     );
                     this.$store.commit(
                         "setUser",
