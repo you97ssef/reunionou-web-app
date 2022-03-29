@@ -11,6 +11,13 @@ Vue.prototype.$api = axios.create({
     baseURL: "http://docketu.iutnc.univ-lorraine.fr:62015/",
 });
 
+Vue.prototype.$api.interceptors.request.use(function (config) {
+    if (store.state.token) {
+        config.params.token = store.state.token;
+    }
+    return config;
+});
+
 Vue.config.productionTip = false;
 
 new Vue({

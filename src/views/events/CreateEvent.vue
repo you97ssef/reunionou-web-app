@@ -43,7 +43,7 @@
                     id="time"
                     class="input"
                     type="time"
-                    required
+                    
                     placeholder="Heure"
                 />
             </div>
