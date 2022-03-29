@@ -3,9 +3,8 @@
         <div class="card-content">
             <p v-for="message in this.messages" :key="message.id">
                 <span class="title is-6 has-text-link">
-                    {{ message.created_at }} - username!
+                    {{ message.created_at }} - {{ message.pseudo }} :
                 </span>
-                -
                 {{ message.content }}
             </p>
             <form @submit.prevent="send()" class="mt-4">
@@ -45,7 +44,13 @@ export default {
                     media: "{}",
                 })
                 .then((response) => {
-                    this.messages.push(response.data.message);
+                    let message = response.data.message;
+                    if (this.$store.state.user) {
+                        message.pseudo = this.$store.state.user.user_username;
+                    } else {
+                        message.pseudo = this.$store.state.guest.pseudo;
+                    }
+                    this.messages.push(message);
                     this.newMessage = "";
                     this.flashMessage.success({
                         message: "Message envoyé.",

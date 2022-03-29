@@ -114,7 +114,7 @@ export default {
                     latitude: 48.677474,
                     longitude: 6.178464,
                 },
-                date: "12/11/2021",
+                date: new Date().toISOString().slice(0, 10),
                 heure: "7:58",
             },
         };
