@@ -8,7 +8,7 @@ import FlashMessage from "@smartweb/vue-flash-message";
 Vue.use(FlashMessage);
 
 Vue.prototype.$api = axios.create({
-    baseURL: "http://localhost:62015/",
+    baseURL: "http://docketu.iutnc.univ-lorraine.fr:62015/",
 });
 
 Vue.prototype.$api.interceptors.request.use(function (config) {
@@ -17,7 +17,6 @@ Vue.prototype.$api.interceptors.request.use(function (config) {
     }
     return config;
 });
-
 
 Vue.config.productionTip = false;
 
