@@ -75,7 +75,6 @@
                 <button class="button is-warning">Modifer Profile</button>
             </div>
         </form>
-        <b class="has-text-danger" v-if="error">{{ error }}</b>
     </div>
 </template>
 
@@ -96,8 +95,10 @@ export default {
     },
     methods: {
         validation() {
-            if (this.user.old_password !== this.user.new_password_confirm) {
-                this.error = "Passwords does not match!";
+            if (this.user.new_password !== this.user.new_password_confirm) {
+                this.flashMessage.error({
+                    message: "Les nouveaux mots de passe ne correspondent pas.",
+                });
             } else {
                 this.$api
                     .put("users/" + this.$store.state.user.user_id, this.user)
