@@ -85,8 +85,8 @@ export default {
         Map,
     },
     created() {
+        // Setting a minimum date
         this.minDate.setDate(this.minDate.getDate() + 1);
-
         this.event.date = this.minDate = this.minDate
             .toISOString()
             .slice(0, 10);
@@ -109,6 +109,7 @@ export default {
         };
     },
     methods: {
+        // Creating a new Event
         validation() {
             this.$api
                 .post("events", this.event)
@@ -124,6 +125,7 @@ export default {
                             status: 1,
                         })
                         .then(() =>
+                            // If event is created going to its page
                             this.$router.push(
                                 "/events/" + response.data.event.id
                             )
@@ -135,6 +137,8 @@ export default {
                     })
                 );
         },
+
+        // Getting the Location details by searching location name
         getPlaceByAddress() {
             axios
                 .get(
@@ -152,7 +156,7 @@ export default {
                         this.event.location.latitude = response.data[0].lat;
                         this.event.location.longitude = response.data[0].lon;
 
-                        this.$refs.map.changePlacementByAddress([
+                        this.$refs.map.changeLocation([
                             this.event.location.latitude,
                             this.event.location.longitude,
                         ]);

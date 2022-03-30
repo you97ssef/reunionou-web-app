@@ -49,6 +49,7 @@ export default {
     },
     methods: {
         validation() {
+            // Login with basikc authorization done automaticlly with axios
             this.$api
                 .post(
                     "auth",
@@ -61,6 +62,7 @@ export default {
                     }
                 )
                 .then((response) => {
+                    // store user profile & token
                     this.$store.commit(
                         "setToken",
                         "Bearer " + response.data["refresh-token"]
@@ -69,6 +71,8 @@ export default {
                         "setUser",
                         jwt_decode(response.data["refresh-token"]).upr
                     );
+
+                    // Redirect to home page
                     this.$router.push("/");
                 })
                 .catch((err) =>

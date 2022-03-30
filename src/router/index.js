@@ -20,6 +20,7 @@ import store from "@/store/index.js";
 
 Vue.use(VueRouter);
 
+// Route Guard checking before getting into the route
 function authGuard(to, from, next) {
     if (store.state.user) {
         next(); // allow to enter route
@@ -28,6 +29,7 @@ function authGuard(to, from, next) {
     }
 }
 
+// Route Guard checking before getting into the route
 function authGuardOrGuest(to, from, next) {
     if (store.state.user || store.state.guest) {
         next(); // allow to enter route
@@ -36,6 +38,7 @@ function authGuardOrGuest(to, from, next) {
     }
 }
 
+// Route Guard checking before getting into the route
 function isAuthGuard(to, from, next) {
     if (!store.state.user) {
         next(); // allow to enter route
@@ -106,7 +109,7 @@ const routes = [
 
 const router = new VueRouter({
     routes,
-    mode: "history",
+    mode: "history", // Taking out the hashtag from the link
 });
 
 export default router;

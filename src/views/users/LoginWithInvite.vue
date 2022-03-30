@@ -46,6 +46,7 @@ export default {
     },
     methods: {
         validation() {
+            // Login with basikc authorization done automaticlly with axios
             this.$api
                 .post(
                     "auth",
@@ -67,6 +68,7 @@ export default {
                         jwt_decode(response.data["refresh-token"]).upr
                     );
 
+                    // Check if user is a member
                     this.$api
                         .get("member", {
                             params: {
@@ -76,6 +78,7 @@ export default {
                         })
                         .then((response) => {
                             if (response.data === null) {
+                                // if he is not a member we add him as a
                                 this.$api
                                     .post("members", {
                                         user_id: this.$store.state.user.user_id,
@@ -96,6 +99,9 @@ export default {
                                         })
                                     );
                             }
+                            this.$router.push(
+                                "/events/" + this.$route.params.id
+                            );
                         });
                 })
                 .catch((err) =>

@@ -99,22 +99,26 @@ export default {
         };
     },
     created() {
+        // Setting a min date
         this.minDate.setDate(this.minDate.getDate() + 1);
-
         this.event.date = this.minDate = this.minDate
             .toISOString()
             .slice(0, 10);
 
+        // Getting the event data
         this.$api.get("events/" + this.$route.params.id).then((response) => {
             this.event = response.data.event;
             this.event.heure = response.data.event.heure.slice(0, -3);
-            this.$refs.map.changePlacementByAddress([
+
+            // Refreshing the map
+            this.$refs.map.changeLocation([
                 this.event.location.latitude,
                 this.event.location.longitude,
             ]);
         });
     },
     methods: {
+        // Editing the event
         validation() {
             this.$api
                 .put("events/" + this.$route.params.id, this.event)
@@ -122,14 +126,18 @@ export default {
                     this.flashMessage.success({
                         message: "Evenement Modifié.",
                     });
+
+                    // Going to event page
                     this.$router.push("/events/" + this.$route.params.id);
                 })
                 .catch((err) =>
                     this.flashMessage.error({
-                        message: "Impossible de créer l'evenement.",
+                        message: "Impossible de modifier l'evenement.",
                     })
                 );
         },
+
+        // Getting the Location details by searching location name
         getPlaceByAddress() {
             axios
                 .get(
@@ -137,17 +145,20 @@ export default {
                         this.event.location.name
                 )
                 .then((response) => {
+                    // if there is no location
                     if (response.data[0] === undefined) {
                         this.flashMessage.error({
                             message: "Pas d'emplacement trouvé.",
                         });
                     } else {
+                        // Setting the location details
                         this.event.location.name =
                             response.data[0].display_name;
                         this.event.location.latitude = response.data[0].lat;
                         this.event.location.longitude = response.data[0].lon;
 
-                        this.$refs.map.changePlacementByAddress([
+                        // Refreshing the map
+                        this.$refs.map.changeLocation([
                             this.event.location.latitude,
                             this.event.location.longitude,
                         ]);

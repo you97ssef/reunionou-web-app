@@ -29,6 +29,7 @@ export default {
     },
     methods: {
         deconnect() {
+            // this method is passed to navbar to be executed
             this.$store.commit("setToken", null);
             this.$store.commit("setUser", false);
             this.$router.push("/login");

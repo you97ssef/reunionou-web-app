@@ -36,7 +36,8 @@ export default {
         centerUpdated(center) {
             this.center = center;
         },
-        changePlacementByAddress(latlng) {
+        changeLocation(latlng) {
+            //Changing location credentials
             this.markerLatLng = this.center = latlng;
         },
     },

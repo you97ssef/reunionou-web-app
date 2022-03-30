@@ -95,10 +95,12 @@ export default {
     methods: {
         validation() {
             if (this.user.new_password !== this.user.new_password_confirm) {
+                // Passwords does not match
                 this.flashMessage.error({
                     message: "Les nouveaux mots de passe ne correspondent pas.",
                 });
             } else {
+                // Editing the profile
                 this.$api
                     .put("users/" + this.$store.state.user.user_id, this.user)
                     .then(() => {

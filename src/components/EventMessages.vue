@@ -43,6 +43,7 @@ export default {
     },
     methods: {
         send() {
+            // Send the message
             this.$api
                 .post("messages/", {
                     content: this.newMessage,
@@ -51,6 +52,7 @@ export default {
                     media: "{}",
                 })
                 .then((response) => {
+                    //Adding a message to the messages list
                     let message = response.data.message;
                     if (this.$store.state.user) {
                         message.pseudo = this.$store.state.user.user_username;

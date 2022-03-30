@@ -61,6 +61,7 @@ export default {
     },
     methods: {
         validation() {
+            // Adding a member
             this.$api
                 .post("members", {
                     user_id: this.selected_user.user_id,
@@ -78,16 +79,19 @@ export default {
                 );
         },
         copy() {
+            // Copying the url to clipboard
             navigator.clipboard.writeText(this.url);
             this.flashMessage.success({
                 message: "Vous aves copiez l'url.",
             });
         },
         toggleShareCard() {
+            // To open or close the share card
             this.$emit("toggleShareCard");
         },
     },
     created() {
+        // Getting all the users
         this.$api
             .get("users")
             .then((response) => {

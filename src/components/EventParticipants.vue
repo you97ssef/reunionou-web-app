@@ -45,6 +45,7 @@ export default {
     },
     methods: {
         reloadMembers() {
+            // Getting the event Members
             this.$api
                 .get("events/" + this.$route.params.id + "/members")
                 .then((response) => {

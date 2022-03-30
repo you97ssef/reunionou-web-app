@@ -86,14 +86,17 @@ export default {
     methods: {
         validation() {
             if (this.user.password.length < 8) {
+                // If Password length is not enough
                 this.flashMessage.error({
                     message: "le mot de passe est trés court.",
                 });
             } else if (this.user.password !== this.user.password_confirm) {
+                // If paswords dont match
                 this.flashMessage.error({
                     message: "Les mots de passe ne correspondent pas.",
                 });
             } else {
+                // Creating an account
                 this.$api
                     .post("users", this.user)
                     .then(() => {

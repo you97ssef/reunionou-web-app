@@ -82,6 +82,7 @@ export default {
     },
     methods: {
         deconnect() {
+            // Using the parent code passed by attribute in the parent
             this.$emit("deconnect");
         },
     },

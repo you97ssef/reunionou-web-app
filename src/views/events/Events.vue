@@ -27,6 +27,7 @@ export default {
     },
     methods: {},
     created() {
+        // Getting events where the user participate
         this.$api
             .get("users/" + this.$store.state.user.user_id + "/events")
             .then((response) => {

@@ -71,7 +71,7 @@ export default {
                     this.event.location.longitude = this.markerLatLng.lng;
                 });
         },
-        changePlacementByAddress(latlng) {
+        changeLocation(latlng) {
             this.markerLatLng = this.center = latlng;
         },
     },

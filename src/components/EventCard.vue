@@ -22,6 +22,7 @@
 
 <script>
 export default {
+    // event passed in parent as attribute
     props: ["event"],
 };
 </script>

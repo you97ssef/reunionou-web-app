@@ -40,6 +40,7 @@ export default {
         };
     },
     created() {
+        // If user is logged in we check or add him as a member
         if (this.$store.state.user) {
             this.$api
                 .get("member", {
@@ -49,7 +50,6 @@ export default {
                     },
                 })
                 .then((response) => {
-                    console.log(response.data);
                     if (response.data === null) {
                         this.$api
                             .post("members", {
@@ -75,7 +75,9 @@ export default {
         }
     },
     methods: {
+        // Adding guest as member if he dosent exists
         validation() {
+            // Generting a token
             const sign = require("jwt-encode");
             const secret = "helloimaguestonthereunionouappmadebyssomestudents";
             const data = {
@@ -90,6 +92,7 @@ export default {
                 pseudo: this.pseudo,
             };
 
+            // check guest as member
             this.$api
                 .get("member", {
                     params: params,

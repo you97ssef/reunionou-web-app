@@ -122,12 +122,17 @@ export default {
         };
     },
     methods: {
+        // Event share and add participant
         toggleShareCard() {
             this.shareCard = !this.shareCard;
         },
+
+        // Reload the members in child
         reloadMembers() {
             this.$refs.members.reloadMembers();
         },
+
+        // Changing member status
         changeStatus(status) {
             this.$api
                 .put("members/" + this.member.id, {
@@ -148,17 +153,19 @@ export default {
         },
     },
     created() {
+        // Getting the event
         this.$api
             .get("events/" + this.$route.params.id)
             .then((response) => {
                 this.event = response.data.event;
 
-                this.$refs.map.changePlacementByAddress([
+                // Refreshing the map
+                this.$refs.map.changeLocation([
                     this.event.location.latitude,
                     this.event.location.longitude,
                 ]);
 
-                // Meteo
+                // Getting the meteo
                 axios
                     .get(
                         `http://api.weatherapi.com/v1/current.json?key=920bc19c7c4049d4ab291530222803&q=${this.event.location.latitude},${this.event.location.longitude}&lang=fr`
@@ -167,13 +174,16 @@ export default {
                         this.meteo = response.data.current;
                     });
 
+                // Getting the creator
                 this.$api
                     .get("users/" + this.event.user_id)
                     .then((response) => {
                         this.creator = response.data.user;
                     });
 
+                // If user is conncted
                 if (this.$store.state.user) {
+                    // Getting User as a member
                     this.$api
                         .get("member", {
                             params: {
@@ -185,6 +195,7 @@ export default {
                             this.member = response.data;
                         });
                 } else {
+                    // getting the Guest as a member
                     this.member = this.$store.state.guest;
                 }
             })
