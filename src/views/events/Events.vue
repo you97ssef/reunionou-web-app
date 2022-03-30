@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1 class="title has-text-centered">Listes des evenements</h1>
+        <h1 class="title has-text-centered">Liste des événements</h1>
         <div class="columns is-multiline is-mobile">
             <div
                 class="column is-half-tablet is-one-third-desktop is-full-mobile"

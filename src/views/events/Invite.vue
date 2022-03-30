@@ -3,7 +3,7 @@
         <figure class="has-text-centered">
             <img src="@/assets/images/user.jpg" width="100" alt="img" />
         </figure>
-        <h2 class="title is-2 has-text-centered">Se connecter comme invité</h2>
+        <h2 class="title is-2 has-text-centered">Se connecter en tant qu'invité</h2>
         <form class="m-3" @submit.prevent="validation()">
             <div class="field">
                 <label for="pseudo">Pseudo</label>
@@ -22,7 +22,7 @@
         </form>
         <div>
             <router-link class="m-3" to="/login"
-                >Se connecter comme utilisateur</router-link
+                >Se connecter en tant qu'utilisateur</router-link
             >
         </div>
     </div>

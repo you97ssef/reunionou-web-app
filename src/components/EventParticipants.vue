@@ -8,7 +8,7 @@
                             <span
                                 class="has-text-link"
                                 v-if="member.user_id === null"
-                                >{{ member.pseudo }} (Guest)</span
+                                >{{ member.pseudo }} (Invité)</span
                             >
                             <span class="has-text-link" v-else>{{
                                 member.pseudo
@@ -16,7 +16,7 @@
                         </span>
                         -
                         <span class="has-text-info" v-if="member.status === -1"
-                            >pas repondu</span
+                            >en attente</span
                         >
                         <span
                             class="has-text-danger"

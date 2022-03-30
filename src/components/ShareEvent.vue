@@ -6,7 +6,7 @@
             </button>
         </div>
         <form class="m-3" @submit.prevent="validation()">
-            <label for="user">Ajouter utilisateur comme participant</label>
+            <label for="user">Ajouter un utilisateur comme participant</label>
             <div class="field">
                 <div class="select is-fullwidth">
                     <select id="user" required v-model="selected_user">
@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="field has-text-right">
-                <button class="button is-success">Ajouter participant</button>
+                <button class="button is-success">Ajouter</button>
             </div>
         </form>
 
@@ -36,7 +36,7 @@
                             class="button is-fullwidth is-link"
                             @click="copy()"
                         >
-                            Copy link
+                            Copier le lien
                         </button>
                     </div>
                 </div>

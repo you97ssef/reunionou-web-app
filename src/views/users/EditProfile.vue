@@ -3,10 +3,10 @@
         <figure class="has-text-centered">
             <img src="@/assets/images/user.jpg" width="100" alt="img" />
         </figure>
-        <h2 class="title is-2 has-text-centered">Modifier mon profile</h2>
+        <h2 class="title is-2 has-text-centered">Modifier mon profil</h2>
         <form class="m-3" @submit.prevent="validation()">
             <div class="field">
-                <label for="fullname">Nom et Prenom</label>
+                <label for="fullname">Nom et Prénom</label>
                 <input
                     id="fullname"
                     v-model="user.fullname"
@@ -60,7 +60,7 @@
                 />
             </div>
             <div class="field">
-                <label for="new_password_confirm">Confirmer mot de passe</label>
+                <label for="new_password_confirm">Confirmer le nouveau mot de passe</label>
                 <input
                     id="new_password_confirm"
                     v-model="user.new_password_confirm"
@@ -70,7 +70,7 @@
                 />
             </div>
             <div class="field">
-                <button class="button is-warning">Modifer Profile</button>
+                <button class="button is-warning">Modifer</button>
             </div>
         </form>
     </div>

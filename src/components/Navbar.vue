@@ -25,24 +25,20 @@
             v-if="username"
         >
             <div class="navbar-start">
-                <router-link class="navbar-item" to="/">Evenements</router-link>
+                <router-link class="navbar-item" to="/">Événements</router-link>
                 <router-link to="/new-event" class="navbar-item"
-                    >Nouvelle evenement</router-link
+                    >Nouvel événement</router-link
                 >
             </div>
             <div class="navbar-end">
                 <div class="navbar-item">
                     <p>
-                        Bonjour
-                        <b
-                            ><router-link to="/edit-profile">{{
-                                username
-                            }}</router-link></b
-                        >
+                        Bonjour 
+                        <b> {{username}}<router-link to="/edit-profile">(Modifier mon profil)</router-link></b>
                     </p>
                 </div>
                 <form class="navbar-item" @submit.prevent="deconnect()">
-                    <button class="button is-danger">Se deconnecter</button>
+                    <button class="button is-danger">Se déconnecter</button>
                 </form>
             </div>
         </div>
@@ -56,10 +52,10 @@
                 <div class="navbar-item">
                     <div class="buttons">
                         <router-link class="button is-primary" to="/register"
-                            >Créer Compte</router-link
+                            >Créer un compte</router-link
                         >
                         <router-link class="button is-light" to="/login"
-                            >Login</router-link
+                            >Se connecter</router-link
                         >
                     </div>
                 </div>

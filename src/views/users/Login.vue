@@ -3,7 +3,7 @@
         <figure class="has-text-centered">
             <img src="@/assets/images/user.jpg" width="100" alt="img" />
         </figure>
-        <h2 class="title is-2 has-text-centered">Login</h2>
+        <h2 class="title is-2 has-text-centered">Se connecter</h2>
         <form class="m-3" @submit.prevent="validation()">
             <div class="field">
                 <label for="email">Email</label>
@@ -28,11 +28,11 @@
                 />
             </div>
             <div class="field">
-                <button class="button is-success">Se connecter</button>
+                <button class="button is-success">Connexion</button>
             </div>
         </form>
         <div>
-            <router-link class="m-3" to="register">Créer compte</router-link>
+            <router-link class="m-3" to="register">Créer un compte</router-link>
         </div>
     </div>
 </template>

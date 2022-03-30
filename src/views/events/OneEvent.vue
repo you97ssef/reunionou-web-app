@@ -169,7 +169,7 @@ export default {
                 this.$api
                     .get("users/" + this.event.user_id)
                     .then((response) => {
-                        this.creator = response.data;
+                        this.creator = response.data.user;
                     });
 
                 if (this.$store.state.user) {
