@@ -67,6 +67,8 @@ export default {
                                     message: "Impossible d'ajouter un membre.",
                                 })
                             );
+                    } else {
+                        this.$router.push("/events/" + this.$route.params.id);
                     }
                 });
         }
