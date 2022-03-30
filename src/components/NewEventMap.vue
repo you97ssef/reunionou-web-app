@@ -29,12 +29,20 @@ export default {
             this.event.location.latitude,
             this.event.location.longitude,
         ];
-        axios.get("http://ip-api.com/json/").then((response) => {
+
+        const success = (position) => {
+            this.center = this.markerLatLng = [
+                position.coords.latitude,
+                position.coords.longitude,
+            ];
+        };
+
+        /*axios.get("http://ip-api.com/json/").then((response) => {
             this.center = this.markerLatLng = [
                 response.data.lat,
                 response.data.lon,
             ];
-        });
+        });*/
     },
     data() {
         return {
