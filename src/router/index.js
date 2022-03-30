@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 
 // Users Views
 import Login from "../views/users/Login";
+import LoginWithInvite from "../views/users/LoginWithInvite";
 import Register from "../views/users/Register";
 import EditProfile from "../views/users/EditProfile";
 
@@ -77,6 +78,12 @@ const routes = [
         path: "/login",
         name: "login",
         component: Login,
+        beforeEnter: isAuthGuard,
+    },
+    {
+        path: "/login-with-invite/:id",
+        name: "login-with-invite",
+        component: LoginWithInvite,
         beforeEnter: isAuthGuard,
     },
     {

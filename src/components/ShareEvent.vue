@@ -50,7 +50,7 @@ export default {
     props: ["event"],
     data() {
         return {
-            url: "http://localhost:8080/#/invite/",
+            url: "https://" + window.location.hostname + "/#/invite/",
             users: [],
             selected_user: {},
         };
@@ -87,7 +87,7 @@ export default {
         this.$api
             .get("users")
             .then((response) => {
-                this.users = response.data;
+                this.users = response.data.users;
             })
             .catch((err) =>
                 this.flashMessage.error({

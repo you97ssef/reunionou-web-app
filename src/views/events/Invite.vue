@@ -3,7 +3,9 @@
         <figure class="has-text-centered">
             <img src="@/assets/images/user.jpg" width="100" alt="img" />
         </figure>
-        <h2 class="title is-2 has-text-centered">Se connecter en tant qu'invité</h2>
+        <h2 class="title is-2 has-text-centered">
+            Se connecter en tant qu'invité
+        </h2>
         <form class="m-3" @submit.prevent="validation()">
             <div class="field">
                 <label for="pseudo">Pseudo</label>
@@ -21,7 +23,9 @@
             </div>
         </form>
         <div>
-            <router-link class="m-3" to="/login"
+            <router-link
+                class="m-3"
+                :to="'/login-with-invite/' + this.$route.params.id"
                 >Se connecter en tant qu'utilisateur</router-link
             >
         </div>
@@ -34,6 +38,38 @@ export default {
         return {
             pseudo: "",
         };
+    },
+    created() {
+        if (this.$store.state.user) {
+            this.$api
+                .get("member", {
+                    params: {
+                        event: this.$route.params.id,
+                        user_id: this.$store.state.user.user_id,
+                    },
+                })
+                .then((response) => {
+                    if (response.data === null) {
+                        this.$api
+                            .post("members", {
+                                user_id: this.$store.state.user.user_id,
+                                event_id: this.$route.params.id,
+                                pseudo: this.$store.state.user.user_username,
+                                status: -1,
+                            })
+                            .then(() => {
+                                this.$router.push(
+                                    "/events/" + this.$route.params.id
+                                );
+                            })
+                            .catch((err) =>
+                                this.flashMessage.error({
+                                    message: "Impossible d'ajouter un membre.",
+                                })
+                            );
+                    }
+                });
+        }
     },
     methods: {
         validation() {
@@ -67,9 +103,8 @@ export default {
                                 };
                                 this.$store.commit(
                                     "setToken",
-                                    sign(data, secret)
+                                    "Bearer " + sign(data, secret)
                                 );
-
 
                                 this.$store.commit(
                                     "setGuest",
@@ -93,7 +128,10 @@ export default {
                                 guest_pseudo: this.$store.state.guest.pseudo,
                             },
                         };
-                        this.$store.commit("setToken", sign(data, secret));
+                        this.$store.commit(
+                            "setToken",
+                            "Bearer " + sign(data, secret)
+                        );
 
                         this.$store.commit("setGuest", response.data);
                         this.$router.push("/events/" + this.$route.params.id);

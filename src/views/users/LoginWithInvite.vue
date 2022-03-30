@@ -3,7 +3,7 @@
         <figure class="has-text-centered">
             <img src="@/assets/images/user.jpg" width="100" alt="img" />
         </figure>
-        <h2 class="title is-2 has-text-centered">Se connecter</h2>
+        <h2 class="title is-2 has-text-centered">Login</h2>
         <form class="m-3" @submit.prevent="validation()">
             <div class="field">
                 <label for="email">Email</label>
@@ -28,12 +28,9 @@
                 />
             </div>
             <div class="field">
-                <button class="button is-success">Connexion</button>
+                <button class="button is-success">Se connecter</button>
             </div>
         </form>
-        <div>
-            <router-link class="m-3" to="register">Créer un compte</router-link>
-        </div>
     </div>
 </template>
 
@@ -69,7 +66,37 @@ export default {
                         "setUser",
                         jwt_decode(response.data["refresh-token"]).upr
                     );
-                    this.$router.push("/");
+
+                    this.$api
+                        .get("member", {
+                            params: {
+                                event: this.$route.params.id,
+                                user_id: this.$store.state.user.user_id,
+                            },
+                        })
+                        .then((response) => {
+                            if (response.data === null) {
+                                this.$api
+                                    .post("members", {
+                                        user_id: this.$store.state.user.user_id,
+                                        event_id: this.$route.params.id,
+                                        pseudo: this.$store.state.user
+                                            .user_username,
+                                        status: -1,
+                                    })
+                                    .then(() => {
+                                        this.$router.push(
+                                            "/events/" + this.$route.params.id
+                                        );
+                                    })
+                                    .catch((err) =>
+                                        this.flashMessage.error({
+                                            message:
+                                                "Impossible d'ajouter un membre.",
+                                        })
+                                    );
+                            }
+                        });
                 })
                 .catch((err) =>
                     this.flashMessage.error({
