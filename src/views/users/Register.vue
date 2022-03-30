@@ -85,20 +85,24 @@ export default {
     },
     methods: {
         validation() {
-            if (this.user.password !== this.user.password_confirm) {
+            if (this.user.password.length < 8) {
+                this.flashMessage.error({
+                    message: "le mot de passe est trés court.",
+                });
+            } else if (this.user.password !== this.user.password_confirm) {
                 this.flashMessage.error({
                     message: "Les mots de passe ne correspondent pas.",
                 });
             } else {
                 this.$api
                     .post("users", this.user)
-                    .then((response) => {
+                    .then(() => {
                         this.flashMessage.success({
                             message: "Compte créé.",
                         });
                         this.$router.push("/login");
                     })
-                    .catch((err) =>
+                    .catch(() =>
                         this.flashMessage.error({
                             message: "Impossible de créer le compte.",
                         })
