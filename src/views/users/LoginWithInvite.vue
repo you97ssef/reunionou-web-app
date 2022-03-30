@@ -1,7 +1,7 @@
 <template>
     <div class="m-5 box">
         <figure class="has-text-centered">
-            <img src="@/assets/images/user.jpg" width="100" alt="img" />
+            <img src="@/assets/images/user.png" width="100" alt="img" />
         </figure>
         <h2 class="title is-2 has-text-centered">Login</h2>
         <form class="m-3" @submit.prevent="validation()">

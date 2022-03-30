@@ -1,7 +1,8 @@
 <template>
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <router-link to="/" class="navbar-item title m-0">
+            <router-link to="/" class="navbar-item title is-5 m-0">
+                <img src="@/assets/images/logo.png" class="mr-2" alt="img" />
                 REUNIONOU
             </router-link>
             <a
@@ -33,9 +34,16 @@
             <div class="navbar-end">
                 <div class="navbar-item">
                     <p>
-                        Bonjour 
-                        <b> {{username}}<router-link to="/edit-profile">(Modifier mon profil)</router-link></b>
+                        Bonjour
+                        <b class="has-text-primary">{{ username }}</b>
                     </p>
+                </div>
+                <div class="navbar-item">
+                    <router-link
+                        to="/edit-profile"
+                        class="button is-danger is-outlined is-small"
+                        >Modifier mon profil</router-link
+                    >
                 </div>
                 <form class="navbar-item" @submit.prevent="deconnect()">
                     <button class="button is-danger">Se déconnecter</button>

@@ -43,7 +43,6 @@
                     id="time"
                     class="input"
                     type="time"
-                    
                     placeholder="Heure"
                 />
             </div>
@@ -89,7 +88,7 @@
 
             <Map :event="event" ref="map" />
             <div class="mt-5 field">
-                <button class="button is-success">Créer événement</button>
+                <button class="button is-success">Créer l'événement</button>
             </div>
         </form>
     </div>

@@ -1,7 +1,7 @@
 <template>
     <div class="m-5 box">
         <figure class="has-text-centered">
-            <img src="@/assets/images/user.jpg" width="100" alt="img" />
+            <img src="@/assets/images/user.png" width="100" alt="img" />
         </figure>
         <h2 class="title is-2 has-text-centered">Modifier mon profil</h2>
         <form class="m-3" @submit.prevent="validation()">
@@ -60,7 +60,9 @@
                 />
             </div>
             <div class="field">
-                <label for="new_password_confirm">Confirmer le nouveau mot de passe</label>
+                <label for="new_password_confirm"
+                    >Confirmer le nouveau mot de passe</label
+                >
                 <input
                     id="new_password_confirm"
                     v-model="user.new_password_confirm"

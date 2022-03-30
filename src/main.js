@@ -11,6 +11,8 @@ Vue.prototype.$api = axios.create({
     baseURL: "http://docketu.iutnc.univ-lorraine.fr:62015/",
 });
 
+Vue.use(require("vue-moment"));
+
 Vue.prototype.$api.interceptors.request.use(function (config) {
     if (store.state.token) {
         config.headers.Authorization = store.state.token;

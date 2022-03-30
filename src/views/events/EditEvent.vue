@@ -1,6 +1,6 @@
 <template>
     <div class="m-5 box">
-        <h2 class="title is-2 has-text-centered">Modifier un evenement</h2>
+        <h2 class="title is-2 has-text-centered">Modifier l'événement</h2>
         <form class="m-3" @submit.prevent="validation()">
             <div class="field">
                 <label for="title">Titre</label>
@@ -48,7 +48,7 @@
                 />
             </div>
             <div class="field">
-                <label for="name">Location</label>
+                <label for="name">Lieu</label>
                 <input
                     v-model="event.location.name"
                     id="name"
@@ -59,12 +59,13 @@
                 />
             </div>
             <div class="field">
+                Evenement
                 <button
                     type="button"
                     @click="getPlaceByAddress()"
                     class="button is-success"
                 >
-                    Get Location
+                    Obtenir l'adresse
                 </button>
             </div>
 
@@ -89,7 +90,7 @@
 
             <Map :event="event" ref="map" />
             <div class="mt-5 field">
-                <button class="button is-success">Modifier Evenement</button>
+                <button class="button is-success">Mettre à jour</button>
             </div>
         </form>
     </div>

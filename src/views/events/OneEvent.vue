@@ -15,12 +15,13 @@
                             this.creator.id === this.$store.state.user.user_id
                         "
                     >
-                        Modifier l'evenement</router-link
+                        Modifier l'événement</router-link
                     >
                 </div>
 
                 <h3 class="m-3 title is-5 has-text-centered">
-                    Date de l'evenement: {{ event.date }} - {{ event.heure }}
+                    Date de l'événement:
+                    {{ event.date | moment("DD/MM/YYYY") }} - {{ event.heure }}
                 </h3>
 
                 <p class="title is-5 has-text-link">
