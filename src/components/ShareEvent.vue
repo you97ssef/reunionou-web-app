@@ -50,7 +50,7 @@ export default {
     props: ["event"],
     data() {
         return {
-            url: "https://" + window.location.hostname + "/#/invite/",
+            url: "https://" + window.location.hostname + "/invite/",
             users: [],
             selected_user: {},
         };
