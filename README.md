@@ -29,7 +29,7 @@ Ce dépôt contient la webapp pour l'administrateur développé avec le framewor
 -   Version web de l'application (Admin): https://github.com/sebastienklaus/reunionou-admin-webapp
 -   Version web de l'application (client): https://github.com/you97ssef/reunionou-web-app
 -   Version mobile: https://github.com/malekbk98/reunionou-mobile-app
--   Backoffice: https://github.com/sebastienklaus/reunionou/tree/develop
+-   Backoffice: https://github.com/sebastienklaus/reunionou/
 
 ## Installation:
 

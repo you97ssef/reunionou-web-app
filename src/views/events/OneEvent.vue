@@ -68,7 +68,7 @@
                         <div v-if="!shareCard" class="field has-text-centered">
                             <button
                                 @click="toggleShareCard()"
-                                class="button is-link is-small"
+                                class="m-3 button is-link is-small"
                             >
                                 Ajouter participant
                             </button>
