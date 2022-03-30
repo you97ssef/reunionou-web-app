@@ -32,6 +32,7 @@
                     id="date"
                     class="input"
                     type="date"
+                    :min="minDate"
                     required
                     placeholder="Date"
                 />
@@ -59,7 +60,6 @@
                 />
             </div>
             <div class="field">
-                Evenement
                 <button
                     type="button"
                     @click="getPlaceByAddress()"
@@ -67,25 +67,6 @@
                 >
                     Obtenir l'adresse
                 </button>
-            </div>
-
-            <div class="field">
-                <input
-                    v-model="event.location.latitude"
-                    class="input"
-                    type="text"
-                    required
-                    placeholder="Adresse"
-                />
-            </div>
-            <div class="field">
-                <input
-                    v-model="event.location.longitude"
-                    class="input"
-                    type="text"
-                    required
-                    placeholder="Adresse"
-                />
             </div>
 
             <Map :event="event" ref="map" />
@@ -112,10 +93,18 @@ export default {
                     latitude: 48.677474,
                     longitude: 6.178464,
                 },
+                date: "",
             },
+            minDate: new Date(),
         };
     },
-    mounted() {
+    created() {
+        this.minDate.setDate(this.minDate.getDate() + 1);
+
+        this.event.date = this.minDate = this.minDate
+            .toISOString()
+            .slice(0, 10);
+
         this.$api.get("events/" + this.$route.params.id).then((response) => {
             this.event = response.data.event;
             this.event.heure = response.data.event.heure.slice(0, -3);

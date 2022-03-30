@@ -49,6 +49,7 @@ export default {
                     },
                 })
                 .then((response) => {
+                    console.log(response.data);
                     if (response.data === null) {
                         this.$api
                             .post("members", {
@@ -75,6 +76,15 @@ export default {
     },
     methods: {
         validation() {
+            const sign = require("jwt-encode");
+            const secret = "helloimaguestonthereunionouappmadebyssomestudents";
+            const data = {
+                upr: {
+                    guest_pseudo: this.$store.state.guest.pseudo,
+                },
+            };
+            this.$store.commit("setToken", "Bearer " + sign(data, secret));
+
             let params = {
                 event: this.$route.params.id,
                 pseudo: this.pseudo,
@@ -94,20 +104,6 @@ export default {
                                 status: -1,
                             })
                             .then((response) => {
-                                const sign = require("jwt-encode");
-                                const secret =
-                                    "helloimaguestonthereunionouappmadebyssomestudents";
-                                const data = {
-                                    upr: {
-                                        guest_pseudo:
-                                            this.$store.state.guest.pseudo,
-                                    },
-                                };
-                                this.$store.commit(
-                                    "setToken",
-                                    "Bearer " + sign(data, secret)
-                                );
-
                                 this.$store.commit(
                                     "setGuest",
                                     response.data.member
@@ -122,19 +118,6 @@ export default {
                                 })
                             );
                     } else {
-                        const sign = require("jwt-encode");
-                        const secret =
-                            "helloimaguestonthereunionouappmadebyssomestudents";
-                        const data = {
-                            upr: {
-                                guest_pseudo: this.$store.state.guest.pseudo,
-                            },
-                        };
-                        this.$store.commit(
-                            "setToken",
-                            "Bearer " + sign(data, secret)
-                        );
-
                         this.$store.commit("setGuest", response.data);
                         this.$router.push("/events/" + this.$route.params.id);
                     }

@@ -32,6 +32,7 @@
                     id="date"
                     class="input"
                     type="date"
+                    :min="minDate"
                     required
                     placeholder="Date"
                 />
@@ -67,25 +68,6 @@
                 </button>
             </div>
 
-            <div class="field">
-                <input
-                    v-model="event.location.latitude"
-                    class="input"
-                    type="text"
-                    required
-                    placeholder="latitude"
-                />
-            </div>
-            <div class="field">
-                <input
-                    v-model="event.location.longitude"
-                    class="input"
-                    type="text"
-                    required
-                    placeholder="longitude"
-                />
-            </div>
-
             <Map :event="event" ref="map" />
             <div class="mt-5 field">
                 <button class="button is-success">Créer l'événement</button>
@@ -102,6 +84,13 @@ export default {
     components: {
         Map,
     },
+    created() {
+        this.minDate.setDate(this.minDate.getDate() + 1);
+
+        this.event.date = this.minDate = this.minDate
+            .toISOString()
+            .slice(0, 10);
+    },
     data() {
         return {
             event: {
@@ -113,9 +102,10 @@ export default {
                     latitude: 48.677474,
                     longitude: 6.178464,
                 },
-                date: new Date().toISOString().slice(0, 10),
-                heure: "7:58",
+                date: "",
+                heure: "",
             },
+            minDate: new Date(),
         };
     },
     methods: {

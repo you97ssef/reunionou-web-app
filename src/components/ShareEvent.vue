@@ -5,7 +5,11 @@
                 X
             </button>
         </div>
-        <form class="m-3" @submit.prevent="validation()">
+        <form
+            class="m-3"
+            @submit.prevent="validation()"
+            v-if="this.$parent.member.user_id === this.$parent.creator.id"
+        >
             <label for="user">Ajouter un utilisateur comme participant</label>
             <div class="field">
                 <div class="select is-fullwidth">
