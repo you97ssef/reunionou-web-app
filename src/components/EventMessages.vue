@@ -3,7 +3,8 @@
         <div class="card-content">
             <p v-for="message in this.messages" :key="message.id">
                 <span class="title is-6 has-text-link">
-                    {{ message.created_at }} - {{ message.pseudo }} :
+                    {{ message.created_at | moment("DD/MM/YYYY") }} -
+                    {{ message.pseudo }} :
                 </span>
                 {{ message.content }}
             </p>

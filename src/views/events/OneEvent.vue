@@ -199,11 +199,12 @@ export default {
                     this.member = this.$store.state.guest;
                 }
             })
-            .catch((err) =>
+            .catch((err) => {
                 this.flashMessage.error({
                     message: "Impossible d'obtenir l'evenement.",
-                })
-            );
+                });
+                this.$router.push("/404");
+            });
     },
 };
 </script>
